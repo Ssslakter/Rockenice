@@ -12,6 +12,7 @@ public class ChunkManager : MonoBehaviour
     public float steepness;
     public float chunkLength;
     public AnimationCurve curve;
+    public Material terrainMaterial;
     List<ChunkMesh> chunks;
 
 
@@ -61,17 +62,19 @@ public class ChunkManager : MonoBehaviour
 
     void GenerateChunk(Vector3 position, int simplificationFactor)
     {
+        GameObject currChunk = new GameObject("chunk");
+        ChunkMesh chunkMesh = currChunk.AddComponent<ChunkMesh>();
+        chunkMesh.meshFilter = currChunk.AddComponent<MeshFilter>();
+        chunkMesh.meshRenderer = currChunk.AddComponent<MeshRenderer>();
+        chunkMesh.meshCollider = currChunk.AddComponent<MeshCollider>();
+
         int worldPositionX = (int)(position.x / chunkLength);
         int worldPositionZ = (int)(position.z / chunkLength);
-        GameObject currChunk = new GameObject("chunk");
         currChunk.transform.parent = transform;
         currChunk.transform.localPosition = position - worldPositionX * 5 * curve.Evaluate(0) * Vector3.up;
         currChunk.transform.localRotation = Quaternion.identity;
-        ChunkMesh chunkMesh = currChunk.AddComponent<ChunkMesh>();
         chunkMesh.offset = new Vector2((resolution - 1) * worldPositionX, -(resolution - 1) * worldPositionZ);
-        chunkMesh.meshFilter = currChunk.AddComponent<MeshFilter>();
-        chunkMesh.meshRenderer = currChunk.AddComponent<MeshRenderer>();
-        chunkMesh.meshRenderer.material = Instantiate(Resources.Load("Materials/Map", typeof(Material)) as Material);
+        chunkMesh.meshRenderer.material = terrainMaterial;
         chunkMesh.resolution = resolution;
         chunkMesh.simplificationFactor = simplificationFactor;
         chunkMesh.chunkLength = chunkLength;

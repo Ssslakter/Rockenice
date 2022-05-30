@@ -23,6 +23,7 @@ public class ChunkMesh : MonoBehaviour
     //public Renderer textureRenderer;
     public MeshFilter meshFilter;
     public MeshRenderer meshRenderer;
+    public MeshCollider meshCollider;
     List<GameObject> rocks;
     Mesh mesh;
     MeshData data;
@@ -51,6 +52,7 @@ public class ChunkMesh : MonoBehaviour
         data = new MeshData(resolution, chunkLength, simplificationFactor);
         mesh = data.GenerateMesh(heightMap);
         meshFilter.mesh = mesh;
+        meshCollider.sharedMesh = mesh;
     }
 
     Texture2D GenerateColorMap(float[,] map)
