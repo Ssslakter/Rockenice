@@ -4,29 +4,28 @@ using UnityEngine;
 
 public class ChunkMesh : MonoBehaviour
 {
-    //public enum DrawMode { NoiseMap, Mesh };
-    //public DrawMode drawMode;
+
 
     [Range(8, 256)]
     public int resolution;
     [Range(1, 6)]
-    public int simplificationFactor;
+    public int simplificationFactor = 1;
     public float chunkLength;
-    [Header("Noise")]
-    public int seed;
-    public Vector2 offset;
     public bool autoUpdate;
-    public float scale = 50;
-    public AnimationCurve curve;
-
-
-    //public Renderer textureRenderer;
+    public float heightMultiplier = 5;
     public MeshFilter meshFilter;
     public MeshRenderer meshRenderer;
     public MeshCollider meshCollider;
+    public NoiseSettings settings;
+    [Header("checkpoint Settings")]
+    public bool isCheckpoint;
+    public float steep = -0.2f;
+    public float localwidth = 4;
     List<GameObject> rocks;
     Mesh mesh;
     MeshData data;
+
+
     private void OnValidate()
     {
         if (resolution < 8)
@@ -36,26 +35,32 @@ public class ChunkMesh : MonoBehaviour
     }
     public void Generate()
     {
-        NoiseSettings settings = new NoiseSettings();
-        settings.seed = seed;
-        settings.offset = offset;
-        settings.scale = scale;
         float[,] heightMap = Noise.GenerateNoiseMap(resolution, resolution, settings, new Vector2(0, 0));
-        meshRenderer.material.mainTexture = GenerateColorMap(heightMap);
-        for (int i = 0; i < heightMap.GetLength(0); i++)
+        if (isCheckpoint)
         {
-            for (int j = 0; j < heightMap.GetLength(1); j++)
-            {
-                heightMap[i, j] += curve.Evaluate((float)i / heightMap.GetLength(0));
-            }
+            heightMap = updateHeightMap(heightMap, steep, localwidth);
         }
-        data = new MeshData(resolution, chunkLength, simplificationFactor);
+        data = new MeshData(resolution, chunkLength, simplificationFactor, heightMultiplier);
         mesh = data.GenerateMesh(heightMap);
+        meshRenderer.material.mainTexture = GenerateColorMap(heightMap, mesh.normals);
         meshFilter.mesh = mesh;
         meshCollider.sharedMesh = mesh;
     }
 
-    Texture2D GenerateColorMap(float[,] map)
+    float[,] updateHeightMap(float[,] map, float steepness, float _width)
+    {
+        float width = _width / heightMultiplier;
+        for (int x = 0; x < map.GetLength(0); x++)
+        {
+            for (int y = 0; y < map.GetLength(1); y++)
+            {
+                map[x, y] += Mathf.Clamp(steepness * (y - map.GetLength(1) / 2f) + width / 2, -width, 0);
+            }
+        }
+        return map;
+    }
+
+    Texture2D GenerateColorMap(float[,] map, Vector3[] normalMap)
     {
         Texture2D texture = new Texture2D(resolution, resolution);
         Color[] colorMap = new Color[resolution * resolution];
@@ -64,7 +69,7 @@ public class ChunkMesh : MonoBehaviour
         {
             for (int i = 0; i < resolution; i++)
             {
-                colorMap[resolution * j + i] = Color.Lerp(Color.black, Color.white, map[i, j]);
+                colorMap[resolution * j + i] = Color.Lerp(Color.black, Color.white, map[i, j] + 3 * normalMap[resolution * j + i].y);
             }
         }
         texture.SetPixels(colorMap);
@@ -105,9 +110,11 @@ class MeshData
     int resolution;
     float chunkLength;
     int simplification;
+    float multiplier;
 
-    public MeshData(int _resolution, float _chunkLength, int sFactor)
+    public MeshData(int _resolution, float _chunkLength, int sFactor, float heightMultiplier)
     {
+        multiplier = heightMultiplier;
         simplification = ((_resolution - 1) % sFactor == 0) ? sFactor : 1;
         chunkLength = _chunkLength;
         resolution = _resolution / simplification;
@@ -124,8 +131,8 @@ class MeshData
             {
                 float xCoord = chunkLength * x / (resolution - 1) - chunkLength / 2;
                 float yCoord = chunkLength * y / (resolution - 1) - chunkLength / 2;
-                float zCoord = 5 * heightMap[x * simplification, y * simplification];
-                vertices[i] = new Vector3(xCoord, zCoord, yCoord);
+                float zCoord = multiplier * heightMap[x * simplification, y * simplification];
+                vertices[i] = new Vector3(xCoord, yCoord, -zCoord);
                 uvs[i] = new Vector2(x * 1f / (resolution - 1), y * 1f / (resolution - 1));
                 if (x != resolution - 1 && y != resolution - 1)
                 {
