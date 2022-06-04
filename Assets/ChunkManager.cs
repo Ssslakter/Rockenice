@@ -24,7 +24,7 @@ public class ChunkManager : MonoBehaviour
     }
     private void Update()
     {
-        //CreateMap();
+        CreateMap();
     }
     void CreateMap()
     {
