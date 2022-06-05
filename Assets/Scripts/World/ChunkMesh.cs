@@ -36,13 +36,14 @@ public class ChunkMesh : MonoBehaviour
     public void Generate()
     {
         float[,] heightMap = Noise.GenerateNoiseMap(resolution, resolution, settings, new Vector2(0, 0));
+        float[,] snowMap = Noise.GenerateNoiseMap(resolution, resolution, settings, new Vector2(100, 100));
         if (isCheckpoint)
         {
             heightMap = updateHeightMap(heightMap, steep, localwidth);
         }
         data = new MeshData(resolution, chunkLength, simplificationFactor, heightMultiplier);
         mesh = data.GenerateMesh(heightMap);
-        meshRenderer.material.mainTexture = GenerateColorMap(heightMap, mesh.normals);
+        meshRenderer.material.mainTexture = GenerateColorMap(snowMap, mesh.normals);
         meshFilter.mesh = mesh;
         meshCollider.sharedMesh = mesh;
     }
@@ -69,7 +70,7 @@ public class ChunkMesh : MonoBehaviour
         {
             for (int i = 0; i < resolution; i++)
             {
-                colorMap[resolution * j + i] = Color.Lerp(Color.black, Color.white, map[i, j] + 3 * normalMap[resolution * j + i].y);
+                colorMap[resolution * j + i] = Color.Lerp(Color.black, Color.white, -map[i, j] + normalMap[resolution * j + i].y);
             }
         }
         texture.SetPixels(colorMap);
