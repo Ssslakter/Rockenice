@@ -15,7 +15,7 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 0
-  m_FogColor: {r: 0.012771457, g: 0.032233052, b: 0.38679248, a: 0.92941177}
+  m_FogColor: {r: 0.012771457, g: 0.032233052, b: 0.38679248, a: 0.11764706}
   m_FogMode: 3
   m_FogDensity: 0.031742074
   m_LinearFogStart: -0.0017445264
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.373115, g: 0.38073787, b: 0.3587354, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -217,7 +217,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.9433962, g: 0.71214366, b: 0.031149892, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1.57
   m_Range: 10
   m_SpotAngle: 30
@@ -275,14 +275,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: -0.9063078, y: -0.000000018473234, z: 0.4226183, w: -0.000000039615973}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 150.194, y: 50, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &705507996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,38 +326,38 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   directionalColor:
     serializedVersion: 2
-    key0: {r: 0.9433962, g: 0.71214366, b: 0.031149892, a: 1}
-    key1: {r: 0.9612751, g: 0.9612751, b: 0.9612751, a: 0.7921569}
-    key2: {r: 1, g: 1, b: 1, a: 1}
-    key3: {r: 0.9450981, g: 0.7137255, b: 0.03137255, a: 0}
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
-    ctime1: 13493
-    ctime2: 52235
-    ctime3: 65535
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
     ctime4: 0
     ctime5: 0
     ctime6: 0
     ctime7: 0
     atime0: 0
-    atime1: 32382
-    atime2: 65535
+    atime1: 65535
+    atime2: 0
     atime3: 0
     atime4: 0
     atime5: 0
     atime6: 0
     atime7: 0
     m_Mode: 0
-    m_NumColorKeys: 4
-    m_NumAlphaKeys: 3
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
   fogColor:
     serializedVersion: 2
-    key0: {r: 0.012771457, g: 0.032233052, b: 0.38679248, a: 0.92941177}
-    key1: {r: 0.990566, g: 0.8504017, b: 0.07943219, a: 0.92941177}
-    key2: {r: 1, g: 1, b: 1, a: 0}
+    key0: {r: 0.012771457, g: 0.032233052, b: 0.38679248, a: 0.11764706}
+    key1: {r: 0.990566, g: 0.8504017, b: 0.07943219, a: 0}
+    key2: {r: 1, g: 1, b: 1, a: 0.11764706}
     key3: {r: 0.9921569, g: 0.85098046, b: 0.078431375, a: 0}
     key4: {r: 0.011764707, g: 0.03137255, b: 0.38823533, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
@@ -372,8 +372,8 @@ MonoBehaviour:
     ctime6: 0
     ctime7: 0
     atime0: 0
-    atime1: 65535
-    atime2: 0
+    atime1: 33153
+    atime2: 65535
     atime3: 0
     atime4: 0
     atime5: 0
@@ -381,9 +381,11 @@ MonoBehaviour:
     atime7: 0
     m_Mode: 0
     m_NumColorKeys: 5
-    m_NumAlphaKeys: 2
+    m_NumAlphaKeys: 3
+  angleAtNoon: 30
+  speed: 10000
   timeOfDay: 0
-  directionLight: {fileID: 705507994}
+  sun: {fileID: 705507994}
 --- !u!1 &1505689063
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,6 +483,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1783878139 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400002, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 3}
+  m_PrefabInstance: {fileID: 198506633}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1841872225
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,7 +597,7 @@ GameObject:
   - component: {fileID: 2022014346}
   - component: {fileID: 2022014347}
   m_Layer: 0
-  m_Name: MapManager
+  m_Name: ChunkManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -623,12 +630,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fe662005f59ad74b991943ff73af99c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1505689067}
+  player: {fileID: 1783878139}
   steepness: 27.1
   checkpointPeriod: 5
   chunkParams:
     heightMultiplier: 5
-    chunkLength: 50
+    chunkLength: 60
     resolution: 121
     terrainMaterial: {fileID: 2100000, guid: 115389d05a66bf24e935a0cff59a76e6, type: 2}
     noiseSettings:
@@ -639,4 +646,4 @@ MonoBehaviour:
       seed: 0
       offset: {x: 0, y: 0}
     steepOfCheckpoint: -0.2
-    localCheckpointWidth: 20
+    localCheckpointWidth: 30

@@ -67,7 +67,7 @@ public class ChunkManager : MonoBehaviour
         public int resolution;
         public Material terrainMaterial;
         public NoiseSettings noiseSettings;
-        [Header("Checkpoint Settings")]
+        [Header("Single Checkpoint Settings")]
         public float steepOfCheckpoint = -0.2f;
         public float localCheckpointWidth = 4;
     }
@@ -85,7 +85,18 @@ public class ChunkManager : MonoBehaviour
             bounds = new Bounds(position, Vector2.one * parameters.chunkLength);
             meshObject = new GameObject("chunk");
             meshObject.transform.parent = parent;
-            meshObject.transform.localPosition = (Vector3)position + parameters.localCheckpointWidth * new Vector3(0, 0, Mathf.FloorToInt((worldPosition.y + checkpointPeriod - 1) / checkpointPeriod));
+            Vector3 shift;
+            if (worldPosition.y > 0)
+            {
+                shift = parameters.localCheckpointWidth * new Vector3(0, 0, Mathf.FloorToInt((worldPosition.y + checkpointPeriod - 1) / checkpointPeriod));
+
+            }
+            else
+            {
+                shift = parameters.localCheckpointWidth * new Vector3(0, 0, Mathf.FloorToInt(worldPosition.y / checkpointPeriod));
+
+            }
+            meshObject.transform.localPosition = (Vector3)position + shift;
             meshObject.transform.localRotation = Quaternion.identity;
 
             ChunkMesh chunkMesh = meshObject.AddComponent<ChunkMesh>();
@@ -97,7 +108,7 @@ public class ChunkManager : MonoBehaviour
             chunkMesh.steep = parameters.steepOfCheckpoint;
             chunkMesh.heightMultiplier = parameters.heightMultiplier;
             chunkMesh.settings = parameters.noiseSettings;
-            chunkMesh.settings.offset = new Vector2((parameters.resolution - 1) * worldPosition.x, -(parameters.resolution - 1) * worldPosition.y);
+            chunkMesh.offset = new Vector2((parameters.resolution - 1) * worldPosition.x, -(parameters.resolution - 1) * worldPosition.y);
             chunkMesh.meshRenderer.material = parameters.terrainMaterial;
             chunkMesh.resolution = parameters.resolution;
             chunkMesh.chunkLength = parameters.chunkLength;

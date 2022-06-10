@@ -2,30 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
+
 public class DayTime : MonoBehaviour
 {
     public Gradient ambientColor;
     public Gradient directionalColor;
     public Gradient fogColor;
-
-    [Range(0, 24)]
+    [SerializeField] private float angleAtNoon;
+    public float speed;
     public float timeOfDay;
-    public Light directionLight;
+    public Light sun;
+
+    private Vector3 dir;
+    private float prevRotation = -1f;
+
+    void Start()
+    {
+
+        dir = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angleAtNoon), Mathf.Sin(Mathf.Deg2Rad * angleAtNoon), 0f);
+        timeOfDay = 0;
+    }
 
 
-    // Update is called once per frame
     void Update()
     {
+
+        if (prevRotation == -1f)
+        {
+            sun.transform.eulerAngles = 100 * Vector3.down;
+            prevRotation = 0f;
+        }
+        else prevRotation = timeOfDay / 86400f;
         if (Application.isPlaying)
         {
-            timeOfDay += Time.deltaTime / 4;
-            timeOfDay %= 24;
-            UpdateLighting(timeOfDay / 24f);
-        }
-        else
-        {
-            UpdateLighting((timeOfDay - 12f) / 24f);
+            timeOfDay += Time.deltaTime * speed;
+            UpdateLighting(timeOfDay / 86400f);
         }
     }
 
@@ -33,8 +44,8 @@ public class DayTime : MonoBehaviour
     {
         RenderSettings.ambientLight = ambientColor.Evaluate(timePercent);
         RenderSettings.fogColor = fogColor.Evaluate(timePercent);
-        directionLight.color = directionalColor.Evaluate(timePercent);
-        directionLight.transform.localRotation = Quaternion.Euler(new Vector3((timePercent * 360f), 50f, 0));
+        sun.color = directionalColor.Evaluate(timePercent);
+        sun.transform.Rotate(dir, (timePercent - prevRotation) * 360f);
 
     }
 }
