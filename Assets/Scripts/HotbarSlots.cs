@@ -8,6 +8,7 @@ public class HotbarSlots : MonoBehaviour
     public GameObject[] unstaticItems;
     public int number;
     public GameObject panel;
+    public GameObject arrowType;
 
     public static GameObject[] items;
 
@@ -16,9 +17,6 @@ public class HotbarSlots : MonoBehaviour
     public KeyCode key3;
     public KeyCode key4;
     public KeyCode key5;
-    public KeyCode key6;
-    public KeyCode key7;
-    public KeyCode key8;
 
     // Start is called before the first frame update
     void Start()
@@ -54,56 +52,27 @@ public class HotbarSlots : MonoBehaviour
         {
             number = 4;
             Equip();
-        }
-        if (Input.GetKeyDown(key6))
-        {
-            number = 5;
-            Equip();
-        }
-        if (Input.GetKeyDown(key7))
-        {
-            number = 6;
-            Equip();
-        }
-        if (Input.GetKeyDown(key8))
-        {
-            number = 7;
-            Equip();
-        }       
+        }   
     }
 
     void Equip()
     {
-        for (int y = 0; y < slot.Length; y++)
+        panel.transform.position = slot[number].transform.position;
+        if (slot[number].transform.childCount > 1)
         {
-            if (y == number)
-            {
-                panel.transform.position = slot[y].transform.position;
-                if (slot[y].transform.childCount > 1)
-                {
-                    Item item = slot[y].transform.GetChild(1).GetComponent<Item>();
+            Item item = slot[number].transform.GetChild(1).GetComponent<Item>();
 
-                    if (item.equipmentType == "Bow")
-                    {
-                        for (int i = 0; i < items.Length; i++)
-                        {
-                            if (i == item.equipmentIndex)
-                            {
-                                items[i].SetActive(!items[i].activeInHierarchy);
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    for (int i = 0; i < items.Length; i++)
-                    {
-                        {
-                            items[i].SetActive(false);
-                        }
-                    }
-                }
-                break;
+            if (item.equipmentType == "Bow")
+            {
+                items[item.equipmentIndex].SetActive(!items[item.equipmentIndex].activeInHierarchy);
+                arrowType.SetActive(true);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < items.Length; i++)
+            {
+                items[i].SetActive(false);
             }
         }
     }

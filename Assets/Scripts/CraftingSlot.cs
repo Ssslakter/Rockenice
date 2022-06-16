@@ -27,7 +27,6 @@ public class CraftingSlot : MonoBehaviour
         z.amountInStack = craftedItemAmount;
 
         inv.AddItem(z);
-        Debug.Log("TUT!");
     }
 }
 

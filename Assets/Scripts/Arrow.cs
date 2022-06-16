@@ -21,6 +21,11 @@ public class Arrow : MonoBehaviour
             rb.rotation = Quaternion.LookRotation(rb.velocity);
         }
     }
+
+    //private void FixedUpdate()
+    //{
+    //    GroundCheck();
+    //}
     public void SetSpeed(Vector3 startVelocity)
     {
         GameObject newTrail = Instantiate(trail, transform);
@@ -28,9 +33,26 @@ public class Arrow : MonoBehaviour
         rb.detectCollisions = true;
         rb.velocity = startVelocity;  
     }
+    //private void GroundCheck()
+    //{
+    //    RaycastHit hitInfo;
+    //    if (Physics.SphereCast(transform.position, rb, Vector3.down, out hitInfo,
+    //                           ((m_Capsule.height / 2f) - m_Capsule.radius) + advancedSettings.groundCheckDistance, Physics.AllLayers, QueryTriggerInteraction.Ignore))
+    //    {
+    //        Destroy(rb);
+    //        Destroy(gameObject, lifeTimeAfterHit);
+    //        GameObject newSpark = Instantiate(spark, transform.position, transform.rotation);
+    //        newSpark.transform.parent = transform;
+
+    //    }
+
+
+    //}
+
 
     private void OnCollisionEnter()
     {
+
         Destroy(rb);
         Destroy(gameObject, lifeTimeAfterHit);
         GameObject newSpark = Instantiate(spark, transform.position, transform.rotation);

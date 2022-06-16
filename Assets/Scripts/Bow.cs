@@ -10,7 +10,7 @@ public class Bow : MonoBehaviour
     public float maxForwardPosition = 0.2f;
     public float maxBackwardPosition = 0.5f;
 
-    public Arrow arrow;
+    public GameObject arrow;
 
     Arrow currentArrow;
 
@@ -59,7 +59,7 @@ public class Bow : MonoBehaviour
     }
     Arrow StartCharging()
     {
-        Arrow newArrow = Instantiate(arrow, transform);
+        Arrow newArrow = Instantiate(arrow, transform).GetComponent<Arrow>();
         return newArrow;
     }
     void Shoot(float tension, Arrow currentArrow)

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8807205807105577132}
   - component: {fileID: 2063013089036820310}
   - component: {fileID: 5932904722486611967}
-  - component: {fileID: 5791979609890698353}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -84,20 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &5791979609890698353
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3093208457482626279}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &3166874236972122737
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,8 +178,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 1.0002021}
+  m_Center: {x: 0, y: 0, z: -0.000099692086}
 --- !u!1 &6876474554816106112
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,7 +191,6 @@ GameObject:
   - component: {fileID: 3105697395187669597}
   - component: {fileID: 2699291597148731468}
   - component: {fileID: -3124172472112253715}
-  - component: {fileID: 8593896106625119425}
   m_Layer: 0
   m_Name: Arrow
   m_TagString: Untagged
@@ -261,17 +245,4 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 3
---- !u!65 &8593896106625119425
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6876474554816106112}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.1729447, y: 0.19435425, z: 0.14733964}
-  m_Center: {x: -0.014942408, y: -0.007822998, z: 0.26740295}
+  m_CollisionDetection: 2
