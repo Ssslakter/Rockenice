@@ -7,6 +7,7 @@ using UnityStandardAssets.Characters.FirstPerson;
 public class Inventory : MonoBehaviour
 {
     public GameObject inventoryObject;
+    public GameObject aimPoint;
     public float distance = 2f;
 
     public Slot[] slots;
@@ -34,6 +35,7 @@ public class Inventory : MonoBehaviour
             if(inventoryObject.activeSelf == false)
             {
                 inventoryObject.SetActive(true);
+                aimPoint.SetActive(false);
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 gameObject.GetComponent<RigidbodyFirstPersonController>().enabled = false;
@@ -41,6 +43,7 @@ public class Inventory : MonoBehaviour
             else
             {
                 inventoryObject.SetActive(false);
+                aimPoint.SetActive(true);
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 gameObject.GetComponent<RigidbodyFirstPersonController>().enabled = true;
@@ -106,6 +109,10 @@ public class Inventory : MonoBehaviour
                     }
                 }
             }
+        }
+        foreach (Slot i in slots)
+        {
+            i.CheckForItem();
         }
     }
 

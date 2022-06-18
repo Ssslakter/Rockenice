@@ -31,6 +31,7 @@ public class HotbarSlots : MonoBehaviour
         if (Input.GetKeyDown(key))
         {
             number = 0;
+            
             Equip();
         }
         if (Input.GetKeyDown(key2))
@@ -55,8 +56,17 @@ public class HotbarSlots : MonoBehaviour
         }   
     }
 
+    void UnEquipAll()
+    {
+        for (int i = 0; i < items.Length; i++)
+        {
+            items[i].SetActive(false);
+        }
+    }
+
     void Equip()
     {
+        UnEquipAll();
         panel.transform.position = slot[number].transform.position;
         if (slot[number].transform.childCount > 1)
         {
@@ -67,6 +77,11 @@ public class HotbarSlots : MonoBehaviour
                 items[item.equipmentIndex].SetActive(!items[item.equipmentIndex].activeInHierarchy);
                 arrowType.SetActive(true);
             }
+            if (item.equipmentType == "Orange")
+            {
+                items[item.equipmentIndex].SetActive(!items[item.equipmentIndex].activeInHierarchy);
+            }
+
         }
         else
         {
