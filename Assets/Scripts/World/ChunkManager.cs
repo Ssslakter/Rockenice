@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class ChunkManager : MonoBehaviour
 {
     public Transform player;
@@ -20,6 +21,8 @@ public class ChunkManager : MonoBehaviour
     {
         transform.Rotate(steepness, 0, 0);
         numberOfVisibleChunks = Mathf.RoundToInt(viewRadius / chunkParams.chunkLength);
+        playerPosition = new Vector2(player.position.x, player.position.y);
+        UpdateVisibleChunks();
     }
     private void Update()
     {
@@ -28,6 +31,7 @@ public class ChunkManager : MonoBehaviour
     }
     void UpdateVisibleChunks()
     {
+
         for (int i = 0; i < visibleLastUpdate.Count; i++)
         {
             visibleLastUpdate[i].ChangeVisibility(false);
@@ -78,6 +82,7 @@ public class ChunkManager : MonoBehaviour
         Vector2 position;
         GameObject meshObject;
         Bounds bounds;
+        ChunkMesh chunkMesh;
 
         public Chunk(Vector2Int worldPosition, Transform parent, int checkpointPeriod, ChunkParams parameters)
         {
@@ -99,7 +104,7 @@ public class ChunkManager : MonoBehaviour
             meshObject.transform.localPosition = (Vector3)position + shift;
             meshObject.transform.localRotation = Quaternion.identity;
 
-            ChunkMesh chunkMesh = meshObject.AddComponent<ChunkMesh>();
+            chunkMesh = meshObject.AddComponent<ChunkMesh>();
             chunkMesh.meshFilter = meshObject.AddComponent<MeshFilter>();
             chunkMesh.meshRenderer = meshObject.AddComponent<MeshRenderer>();
             chunkMesh.meshCollider = meshObject.AddComponent<MeshCollider>();
@@ -112,8 +117,13 @@ public class ChunkManager : MonoBehaviour
             chunkMesh.meshRenderer.material = parameters.terrainMaterial;
             chunkMesh.resolution = parameters.resolution;
             chunkMesh.chunkLength = parameters.chunkLength;
-            chunkMesh.Generate();
+            GenerateChunk();
             meshObject.SetActive(false);
+        }
+
+        void GenerateChunk()
+        {
+            chunkMesh.Generate();
         }
 
         public void UpdateChunk()
@@ -133,4 +143,3 @@ public class ChunkManager : MonoBehaviour
     }
 
 }
-

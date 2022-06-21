@@ -5,20 +5,26 @@ using UnityEngine;
 
 public class DayTime : MonoBehaviour
 {
-    public Gradient ambientColor;
-    public Gradient directionalColor;
-    public Gradient fogColor;
+    //public Gradient ambientColor;
+    //public Gradient directionalColor;
+    //public Gradient fogColor;
+    [SerializeField] private Color fogColorDay = Color.grey, fogColorNight = Color.black;
+    [SerializeField] private float intensityAtNoon = 1f, intensityAtSunSet = 0.5f;
     [SerializeField] private float angleAtNoon;
+    [SerializeField] private float starsFadeInTime = 7200f, starsFadeOutTime = 7200f;
+    [SerializeField] private float timeLight = 68400f, timeExtinguish = 12600f;
     public float speed;
     public float timeOfDay;
     public Light sun;
 
     private Vector3 dir;
-    private float prevRotation = -1f;
+    private float prevRotation = -1f, intensity, sunSet, sunRise, fade = 0;
+    private Color tintColor = new Color(0.5f, 0.5f, 0.5f, 0.5f);
+    private Renderer rend;
 
     void Start()
     {
-
+        rend = transform.GetComponent<ParticleSystem>().GetComponent<Renderer>();
         dir = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angleAtNoon), Mathf.Sin(Mathf.Deg2Rad * angleAtNoon), 0f);
         timeOfDay = 0;
     }
@@ -36,16 +42,47 @@ public class DayTime : MonoBehaviour
         if (Application.isPlaying)
         {
             timeOfDay += Time.deltaTime * speed;
-            UpdateLighting(timeOfDay / 86400f);
+            UpdateLighting(timeOfDay);
         }
     }
 
-    private void UpdateLighting(float timePercent)
+    private void UpdateLighting(float time)
     {
-        RenderSettings.ambientLight = ambientColor.Evaluate(timePercent);
-        RenderSettings.fogColor = fogColor.Evaluate(timePercent);
-        sun.color = directionalColor.Evaluate(timePercent);
-        sun.transform.Rotate(dir, (timePercent - prevRotation) * 360f);
+
+        //RenderSettings.ambientLight = ambientColor.Evaluate(timePercent);
+        //RenderSettings.fogColor = fogColor.Evaluate(timePercent);
+        //sun.color = directionalColor.Evaluate(timePercent);
+        if (time < sunRise) intensity = intensityAtSunSet * time / sunRise;
+        else if (time < 43200f) intensity = intensityAtSunSet + (intensityAtNoon - intensityAtSunSet) * (time - sunRise) / (43200f - sunRise);
+        else if (time < sunSet) intensity = intensityAtNoon - (intensityAtNoon - intensityAtSunSet) * (time - 43200f) / (sunSet - 43200f);
+        else intensity = intensityAtSunSet - (1f - intensityAtSunSet) * (time - sunSet) / (86400f - sunSet);
+        sun.transform.Rotate(dir, (time / 86400f - prevRotation) * 360f);
+        RenderSettings.fogColor = Color.Lerp(fogColorNight, fogColorDay, intensity * intensity);
+        if (sun != null) sun.intensity = intensity;
+
+        if (TimeBetween(time % 86400f, timeLight, timeExtinguish))
+        {
+            fade += Time.deltaTime / starsFadeInTime;
+            if (fade > 1f) fade = 1f;
+        }
+        else
+        {
+            fade -= Time.deltaTime / starsFadeOutTime;
+            if (fade < 0f) fade = 0f;
+        }
+        tintColor.a = fade;
+        //rend.material.SetColor("_TintColor", tintColor);
+    }
+    private bool TimeBetween(float currentTime, float startTime, float endTime)
+    {
+        if (startTime < endTime)
+        {
+            return (currentTime >= startTime && currentTime <= endTime) ? true : false;
+        }
+        else
+        {
+            return (currentTime < startTime && currentTime > endTime) ? false : true;
+        }
 
     }
 }
