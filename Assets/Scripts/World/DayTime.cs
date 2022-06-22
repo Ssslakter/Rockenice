@@ -11,11 +11,13 @@ public class DayTime : MonoBehaviour
     [SerializeField] private Color fogColorDay = Color.grey, fogColorNight = Color.black;
     [SerializeField] private float intensityAtNoon = 1f, intensityAtSunSet = 0.5f;
     [SerializeField] private float angleAtNoon;
-    [SerializeField] private float starsFadeInTime = 7200f, starsFadeOutTime = 7200f;
-    [SerializeField] private float timeLight = 68400f, timeExtinguish = 12600f;
+    [SerializeField] private float starsFadeInTime = 10f, starsFadeOutTime = 10f;
+    [SerializeField] private float timeLight = 35000f, timeExtinguish = 90000f;
     public float speed;
     public float timeOfDay;
     public Light sun;
+    public Transform player;
+    public float ttintColor;
 
     private Vector3 dir;
     private float prevRotation = -1f, intensity, sunSet, sunRise, fade = 0;
@@ -32,7 +34,6 @@ public class DayTime : MonoBehaviour
 
     void Update()
     {
-
         if (prevRotation == -1f)
         {
             sun.transform.eulerAngles = 100 * Vector3.down;
@@ -41,14 +42,14 @@ public class DayTime : MonoBehaviour
         else prevRotation = timeOfDay / 86400f;
         if (Application.isPlaying)
         {
+            transform.position = player.position;
             timeOfDay += Time.deltaTime * speed;
-            UpdateLighting(timeOfDay);
+            UpdateLighting(timeOfDay % 86400f);
         }
     }
 
     private void UpdateLighting(float time)
     {
-
         //RenderSettings.ambientLight = ambientColor.Evaluate(timePercent);
         //RenderSettings.fogColor = fogColor.Evaluate(timePercent);
         //sun.color = directionalColor.Evaluate(timePercent);
@@ -60,7 +61,7 @@ public class DayTime : MonoBehaviour
         RenderSettings.fogColor = Color.Lerp(fogColorNight, fogColorDay, intensity * intensity);
         if (sun != null) sun.intensity = intensity;
 
-        if (TimeBetween(time % 86400f, timeLight, timeExtinguish))
+        if (TimeBetween(time, timeLight, timeExtinguish))
         {
             fade += Time.deltaTime / starsFadeInTime;
             if (fade > 1f) fade = 1f;
@@ -71,7 +72,8 @@ public class DayTime : MonoBehaviour
             if (fade < 0f) fade = 0f;
         }
         tintColor.a = fade;
-        //rend.material.SetColor("_TintColor", tintColor);
+        ttintColor = fade;
+        rend.material.SetColor("_TintColor", tintColor);
     }
     private bool TimeBetween(float currentTime, float startTime, float endTime)
     {
