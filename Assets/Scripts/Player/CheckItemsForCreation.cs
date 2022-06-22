@@ -24,7 +24,7 @@ public class CheckItemsForCreation : MonoBehaviour
             DestroyImmediate(child.gameObject, true);
         }
 
-        foreach(GameObject craftItem in items)
+        foreach (GameObject craftItem in items)
         {
             bool canCraft = true;
             foreach (RequiredItem i in craftItem.transform.GetChild(0).GetComponent<CraftingSlot>().itemsNeeded)// getting list of needed items
@@ -39,16 +39,8 @@ public class CheckItemsForCreation : MonoBehaviour
             if (canCraft)
             {
                 var item = Instantiate(craftItem);
-                item.transform.parent = craftPanel.transform;
-                if (inventory == null)
-                {
-                    Debug.Log("Капец...");
-                }
-                else
-                {
-                    Debug.Log("Как бы не конец, но капец...");
-                    item.GetComponentInChildren<CraftingSlot>().inv = inventory;
-                }
+                item.transform.SetParent(craftPanel.transform);
+                item.GetComponentInChildren<CraftingSlot>().inv = inventory;
             }
         }
     }

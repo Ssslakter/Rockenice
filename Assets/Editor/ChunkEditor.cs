@@ -20,9 +20,5 @@ public class ChunkEditor : Editor
         {
             chunk.Generate();
         }
-        if (GUILayout.Button("Generate Rocks"))
-        {
-            chunk.GenerateRocks();
-        }
     }
 }

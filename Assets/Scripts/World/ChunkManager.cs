@@ -2,130 +2,144 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class ChunkManager : MonoBehaviour
 {
     public Transform player;
-    public int radius;
-    [Range(8, 256)]
-    public int resolution;
+    public const float viewRadius = 300;
     [Range(0, 90)]
     public float steepness;
-    public float chunkLength;
-    public AnimationCurve curve;
-    public Material terrainMaterial;
-    List<ChunkMesh> chunks;
+    [Range(3, 20)]
+    public int checkpointPeriod = 5;
+    public ChunkParams chunkParams;
+    int numberOfVisibleChunks;
+    static Vector2 playerPosition;
+    Dictionary<Vector2, Chunk> chunkDictionary = new Dictionary<Vector2, Chunk>();
+    List<Chunk> visibleLastUpdate = new List<Chunk>();
 
-
-    private void Start()
+    private void Awake()
     {
-        transform.Rotate(0, 0, steepness);
-        chunks = new List<ChunkMesh>();
-        CreateMap();
+        transform.Rotate(steepness, 0, 0);
+        numberOfVisibleChunks = Mathf.RoundToInt(viewRadius / chunkParams.chunkLength);
+        playerPosition = new Vector2(player.position.x, player.position.y);
+        UpdateVisibleChunks();
     }
     private void Update()
     {
-        CreateMap();
+        playerPosition = new Vector2(player.position.x, player.position.y);
+        UpdateVisibleChunks();
     }
-    void CreateMap()
+    void UpdateVisibleChunks()
     {
-        Vector3Int playerPosition = Vector3Int.FloorToInt(new Vector3(player.position.x / chunkLength, 0, player.position.z / chunkLength));
-        for (int x = -4; x <= 4; x++)
-        {
-            for (int y = -4; y <= 4; y++)
-            {
-                Vector3 pos = chunkLength * (playerPosition + new Vector3(x, 0, y));
-                int simplificationFactor = Simplification((pos - player.position).magnitude);
-                UpdateMap(pos, simplificationFactor);
-            }
-        }
-    }
 
-    void UpdateMap(Vector3 position, int simplificationFactor)
-    {
-        bool isChunkExists = false;
-        for (int i = 0; i < chunks.Count; i++)
+        for (int i = 0; i < visibleLastUpdate.Count; i++)
         {
-            if (chunks[i].transform.localPosition.x == position.x && chunks[i].transform.localPosition.z == position.z)
+            visibleLastUpdate[i].ChangeVisibility(false);
+        }
+        visibleLastUpdate.Clear();
+
+        int currX = Mathf.RoundToInt(player.position.x / chunkParams.chunkLength);
+        int currY = Mathf.RoundToInt(player.position.y / chunkParams.chunkLength);
+
+        for (int x = -numberOfVisibleChunks; x <= numberOfVisibleChunks; x++)
+        {
+            for (int y = -numberOfVisibleChunks; y <= numberOfVisibleChunks; y++)
             {
-                isChunkExists = true;
-                if (chunks[i].simplificationFactor != simplificationFactor)
+                Vector2Int worldPos = new Vector2Int(x + currX, y + currY);
+                if (chunkDictionary.ContainsKey(worldPos))
                 {
-                    UpdateChunk(chunks[i], simplificationFactor);
+                    chunkDictionary[worldPos].UpdateChunk();
+                    if (chunkDictionary[worldPos].isVisible())
+                    {
+                        visibleLastUpdate.Add(chunkDictionary[worldPos]);
+                    }
+                }
+                else
+                {
+                    chunkDictionary.Add(worldPos, new Chunk(worldPos, transform, checkpointPeriod, chunkParams));
                 }
             }
         }
-        if (!isChunkExists && simplificationFactor != 0)
-        {
-            GenerateChunk(position, simplificationFactor);
-        }
     }
 
-    void GenerateChunk(Vector3 position, int simplificationFactor)
+    [System.Serializable]
+    public class ChunkParams
     {
-        GameObject currChunk = new GameObject("chunk");
-        ChunkMesh chunkMesh = currChunk.AddComponent<ChunkMesh>();
-        chunkMesh.meshFilter = currChunk.AddComponent<MeshFilter>();
-        chunkMesh.meshRenderer = currChunk.AddComponent<MeshRenderer>();
-        chunkMesh.meshCollider = currChunk.AddComponent<MeshCollider>();
-
-        int worldPositionX = (int)(position.x / chunkLength);
-        int worldPositionZ = (int)(position.z / chunkLength);
-        currChunk.transform.parent = transform;
-        currChunk.transform.localPosition = position - worldPositionX * 5 * curve.Evaluate(0) * Vector3.up;
-        currChunk.transform.localRotation = Quaternion.identity;
-        chunkMesh.offset = new Vector2((resolution - 1) * worldPositionX, -(resolution - 1) * worldPositionZ);
-        chunkMesh.meshRenderer.material = terrainMaterial;
-        chunkMesh.resolution = resolution;
-        chunkMesh.simplificationFactor = simplificationFactor;
-        chunkMesh.chunkLength = chunkLength;
-        chunkMesh.curve = curve;
-        chunkMesh.Generate();
-        chunks.Add(chunkMesh);
+        public float heightMultiplier;
+        public float chunkLength;
+        [Range(8, 256)]
+        public int resolution;
+        public Material terrainMaterial;
+        public NoiseSettings noiseSettings;
+        [Header("Single Checkpoint Settings")]
+        public float steepOfCheckpoint = -0.2f;
+        public float localCheckpointWidth = 4;
     }
 
-    void UpdateChunk(ChunkMesh chunk, int simplificationFactor)
+
+    public class Chunk
     {
-        chunk.simplificationFactor = simplificationFactor;
-        if (simplificationFactor == 0)
+        Vector2 position;
+        GameObject meshObject;
+        Bounds bounds;
+        ChunkMesh chunkMesh;
+
+        public Chunk(Vector2Int worldPosition, Transform parent, int checkpointPeriod, ChunkParams parameters)
         {
-            chunk.gameObject.SetActive(false);
-        }
-        else
-        {
-            chunk.gameObject.SetActive(true);
-            chunk.Generate();
+            position = parameters.chunkLength * (Vector2)worldPosition;
+            bounds = new Bounds(position, Vector2.one * parameters.chunkLength);
+            meshObject = new GameObject("chunk");
+            meshObject.transform.parent = parent;
+            Vector3 shift;
+            if (worldPosition.y > 0)
+            {
+                shift = parameters.localCheckpointWidth * new Vector3(0, 0, Mathf.FloorToInt((worldPosition.y + checkpointPeriod - 1) / checkpointPeriod));
+
+            }
+            else
+            {
+                shift = parameters.localCheckpointWidth * new Vector3(0, 0, Mathf.FloorToInt(worldPosition.y / checkpointPeriod));
+
+            }
+            meshObject.transform.localPosition = (Vector3)position + shift;
+            meshObject.transform.localRotation = Quaternion.identity;
+
+            chunkMesh = meshObject.AddComponent<ChunkMesh>();
+            chunkMesh.meshFilter = meshObject.AddComponent<MeshFilter>();
+            chunkMesh.meshRenderer = meshObject.AddComponent<MeshRenderer>();
+            chunkMesh.meshCollider = meshObject.AddComponent<MeshCollider>();
+            chunkMesh.isCheckpoint = worldPosition.y % checkpointPeriod == 0;
+            chunkMesh.localwidth = parameters.localCheckpointWidth;
+            chunkMesh.steep = parameters.steepOfCheckpoint;
+            chunkMesh.heightMultiplier = parameters.heightMultiplier;
+            chunkMesh.settings = parameters.noiseSettings;
+            chunkMesh.offset = new Vector2((parameters.resolution - 1) * worldPosition.x, -(parameters.resolution - 1) * worldPosition.y);
+            chunkMesh.meshRenderer.material = parameters.terrainMaterial;
+            chunkMesh.resolution = parameters.resolution;
+            chunkMesh.chunkLength = parameters.chunkLength;
+            GenerateChunk();
+            meshObject.SetActive(false);
         }
 
+        void GenerateChunk()
+        {
+            chunkMesh.Generate();
+        }
+
+        public void UpdateChunk()
+        {
+            bool visible = Mathf.Sqrt(bounds.SqrDistance(playerPosition)) <= viewRadius;
+            ChangeVisibility(visible);
+        }
+        public void ChangeVisibility(bool visibility)
+        {
+            meshObject.SetActive(visibility);
+        }
+
+        public bool isVisible()
+        {
+            return meshObject.activeSelf;
+        }
     }
 
-
-
-    int Simplification(float distance)
-    {
-        if (distance < radius / 6)
-        {
-            return 1;
-        }
-        if (distance < radius / 5)
-        {
-            return 2;
-        }
-        if (distance < radius / 4)
-        {
-            return 3;
-        }
-        if (distance < radius / 3)
-        {
-            return 4;
-        }
-        if (distance < radius / 2)
-        {
-            return 5;
-        }
-        if (distance < radius)
-        {
-            return 6;
-        }
-        return 0;
-    }
 }
