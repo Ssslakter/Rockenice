@@ -39,7 +39,7 @@ public class CheckItemsForCreation : MonoBehaviour
             if (canCraft)
             {
                 var item = Instantiate(craftItem);
-                item.transform.parent = craftPanel.transform;
+                item.transform.SetParent(craftPanel.transform);
                 item.GetComponentInChildren<CraftingSlot>().inv = inventory;
             }
         }
