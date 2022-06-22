@@ -82,7 +82,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public MouseLook mouseLook = new MouseLook();
         public AdvancedSettings advancedSettings = new AdvancedSettings();
 
-
         private Rigidbody m_RigidBody;
         private CapsuleCollider m_Capsule;
         private float m_YRotation;
@@ -244,7 +243,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void GroundCheck()
         {
             m_PreviouslyGrounded = m_IsGrounded;
-            RaycastHit hitInfo;
+            RaycastHit hitInfo;  
             if (Physics.SphereCast(transform.position, m_Capsule.radius * (1.0f - advancedSettings.shellOffset), Vector3.down, out hitInfo,
                                    ((m_Capsule.height / 2f) - m_Capsule.radius) + advancedSettings.groundCheckDistance, Physics.AllLayers, QueryTriggerInteraction.Ignore))
             {
@@ -260,6 +259,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 m_Jumping = false;
             }
+
         }
     }
 }
