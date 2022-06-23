@@ -26,7 +26,6 @@ public class Outline : MonoBehaviour {
     }
 
     Outline outline;
-    public GameObject player;
     public Text sign;
 
     public Mode OutlineMode {
@@ -149,10 +148,10 @@ public class Outline : MonoBehaviour {
 
     private void OnMouseEnter()
     {
-        if(Vector3.Distance(gameObject.transform.position, player.transform.position) < 3f)
+        if (Vector3.Distance(gameObject.transform.position, Global.player.transform.position) < 3f)
         {
             outline.enabled = true;
-            sign.text = gameObject.GetComponent<Item>().itemID.ToString();
+            sign.text = Global.itemIds[gameObject.GetComponent<Item>().itemID];
         }
     }
     public void OnMouseExit()

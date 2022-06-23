@@ -233,7 +233,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1629779106}
   sign: {fileID: 334459073}
   outlineMode: 0
   outlineColor: {r: 0.9056604, g: 0.16660735, b: 0.16660735, a: 0.30588236}
@@ -651,7 +650,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1629779106}
   sign: {fileID: 334459073}
   outlineMode: 0
   outlineColor: {r: 0, g: 0, b: 0, a: 1}
@@ -1736,7 +1734,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1629779106}
   sign: {fileID: 334459073}
   outlineMode: 0
   outlineColor: {r: 0, g: 0, b: 0, a: 1}
@@ -7649,7 +7646,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1629779106}
   sign: {fileID: 334459073}
   outlineMode: 0
   outlineColor: {r: 0, g: 0, b: 0, a: 1}
@@ -7913,7 +7909,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1629779106}
   sign: {fileID: 334459073}
   outlineMode: 1
   outlineColor: {r: 0, g: 0, b: 0, a: 1}
@@ -14476,7 +14471,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1629779106}
   sign: {fileID: 334459073}
   outlineMode: 0
   outlineColor: {r: 0, g: 0, b: 0, a: 1}
@@ -15861,7 +15855,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1629779106}
   sign: {fileID: 334459073}
   outlineMode: 0
   outlineColor: {r: 0, g: 0, b: 0, a: 1}
@@ -16255,7 +16248,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1629779106}
   sign: {fileID: 334459073}
   outlineMode: 0
   outlineColor: {r: 0, g: 0, b: 0, a: 1}

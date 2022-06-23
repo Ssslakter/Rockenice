@@ -62,8 +62,6 @@ public class Inventory : MonoBehaviour
                     AddItem(hit.collider.gameObject.GetComponent<Item>());
                     hit.collider.gameObject.GetComponent<Outline>().OnMouseExit();
                 }
-
-
             }
         }
 
@@ -123,6 +121,8 @@ public class Inventory : MonoBehaviour
             {
                 z.amountInStack -= amountToRemove;
                 amountToRemove = 0;
+                
+                break;
             }
         }
         foreach (Slot i in slots)
