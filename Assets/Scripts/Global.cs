@@ -13,6 +13,13 @@ public static class Global
         {3,"bow" },
         {10,"orange" }
     };
+    static public Dictionary<int, FullScreenMode> screenModes = new Dictionary<int, FullScreenMode>
+    {
+        {0,FullScreenMode.Windowed },
+         {1,FullScreenMode.FullScreenWindow },
+        {2,FullScreenMode.ExclusiveFullScreen }
+
+    };
 
 
     static public void LoadPrefabs()
