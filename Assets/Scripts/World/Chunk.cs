@@ -33,6 +33,8 @@ public class ChunkMesh : MonoBehaviour
             resolution = 8;
         }
     }
+
+
     public void Generate()
     {
         float[,] heightMap = Noise.GenerateNoiseMap(resolution, resolution, settings, offset);
@@ -46,7 +48,7 @@ public class ChunkMesh : MonoBehaviour
         mesh = data.GenerateMesh(heightMap, heightMultiplier);
         if (isCheckpoint)
         {
-            //SpawnObjects();  TODO
+            SpawnObjects();
         }
         meshRenderer.material.mainTexture = GenerateColorMap(snowMap, mesh.normals);
         meshFilter.mesh = mesh;
@@ -84,9 +86,20 @@ public class ChunkMesh : MonoBehaviour
         return texture;
     }
 
-    public void SpawnObjects(List<GameObject> list)
+    public void SpawnObjects()
     {
-
+        foreach (GameObject item in Global.prefabs)
+        {
+            for (int i = 0; i < Random.Range(0, 4); i++)
+            {
+                GameObject obj = Instantiate(item);
+                Outline outline = obj.AddComponent<Outline>();
+                outline.OutlineColor = Color.black;
+                outline.OutlineWidth = 10;
+                outline.OutlineMode = Outline.Mode.OutlineAll;
+                SpawnObjectRandomly(obj, 0.1f);
+            }
+        }
     }
 
     private void SpawnObjectRandomly(GameObject gameObject, float flatnessCoef)
@@ -107,7 +120,7 @@ public class ChunkMesh : MonoBehaviour
 
         gameObject.transform.parent = transform;
         gameObject.transform.localPosition = mesh.vertices[spawnPlace];
-        gameObject.transform.localRotation = Quaternion.LookRotation(mesh.normals[spawnPlace], mesh.normals[spawnPlace]);
+        gameObject.transform.rotation = Quaternion.LookRotation(Vector3.forward, mesh.normals[spawnPlace]);
     }
 
 }
