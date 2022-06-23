@@ -58,7 +58,11 @@ public class Inventory : MonoBehaviour
             if (Physics.Raycast(ray, out hit, distance))
             {
                 if (hit.collider.gameObject.GetComponent<Item>())
+                {
                     AddItem(hit.collider.gameObject.GetComponent<Item>());
+                    hit.collider.gameObject.GetComponent<Outline>().OnMouseExit();
+                }
+
 
             }
         }

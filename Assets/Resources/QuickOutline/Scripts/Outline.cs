@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 [DisallowMultipleComponent]
 
@@ -25,6 +26,8 @@ public class Outline : MonoBehaviour {
     }
 
     Outline outline;
+    public GameObject player;
+    public Text sign;
 
     public Mode OutlineMode {
         get { return outlineMode; }
@@ -146,11 +149,16 @@ public class Outline : MonoBehaviour {
 
     private void OnMouseEnter()
     {
-        outline.enabled = true;
+        if(Vector3.Distance(gameObject.transform.position, player.transform.position) < 3f)
+        {
+            outline.enabled = true;
+            sign.text = gameObject.GetComponent<Item>().itemID.ToString();
+        }
     }
-    private void OnMouseExit()
+    public void OnMouseExit()
     {
         outline.enabled = false;
+        sign.text = "";
     }
 
     void OnDisable() {
