@@ -17,7 +17,7 @@ public class ChunkManager : MonoBehaviour
     Dictionary<Vector2, Chunk> chunkDictionary = new Dictionary<Vector2, Chunk>();
     List<Chunk> visibleLastUpdate = new List<Chunk>();
 
-    private void Awake()
+    private void Start()
     {
         transform.Rotate(steepness, 0, 0);
         numberOfVisibleChunks = Mathf.RoundToInt(viewRadius / chunkParams.chunkLength);
