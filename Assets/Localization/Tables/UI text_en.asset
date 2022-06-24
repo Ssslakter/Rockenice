@@ -84,6 +84,38 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 2864722018281455618
+  - m_Id: 382556853829632
+    m_Localized: Stick
+    m_Metadata:
+      m_Items: []
+  - m_Id: 391046745882624
+    m_Localized: Orange
+    m_Metadata:
+      m_Items: []
+  - m_Id: 398462266966016
+    m_Localized: Stone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 398571763466240
+    m_Localized: Bow
+    m_Metadata:
+      m_Items: []
+  - m_Id: 419325196435456
+    m_Localized: Mushroom
+    m_Metadata:
+      m_Items: []
+  - m_Id: 419448236343296
+    m_Localized: Campfire
+    m_Metadata:
+      m_Items: []
+  - m_Id: 419768572116992
+    m_Localized: Metal scrap
+    m_Metadata:
+      m_Items: []
+  - m_Id: 419890471174144
+    m_Localized: Planks
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

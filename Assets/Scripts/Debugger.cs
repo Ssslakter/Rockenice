@@ -8,8 +8,6 @@ public class Debugger : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        Global.LoadPrefabs();
-        prefabs = Global.prefabs;
         generate();
     }
 
