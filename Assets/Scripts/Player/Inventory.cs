@@ -33,7 +33,7 @@ public class Inventory : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if(inventoryObject.activeSelf == false)
+            if (inventoryObject.activeSelf == false)
             {
                 inventoryObject.SetActive(true);
                 aimPoint.SetActive(false);
@@ -61,16 +61,14 @@ public class Inventory : MonoBehaviour
                 {
                     AddItem(hit.collider.gameObject.GetComponent<Item>());
                     hit.collider.gameObject.GetComponent<Outline>().OnMouseExit();
-                }
             }
         }
+        }
 
-        foreach(Slot i in slots)
+        foreach (Slot i in slots)
         {
             i.CheckForItem();
         }
-        //foreach (Slot i in equipSlots)
-        //i.CheckForItem();
     }
 
     public int GetItemAmount(int id)

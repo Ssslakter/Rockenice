@@ -26,7 +26,7 @@ public static class SaveDataManager
 
             return sd;
         }
-        return new SaveData();
+        return SaveData.Default();
     }
 
     private static bool WriteToFile(string a_FileName, string a_FileContents)
@@ -40,7 +40,7 @@ public static class SaveDataManager
         }
         catch (Exception e)
         {
-            Debug.LogError($"Failed to write to {fullPath} with exception {e}");
+            Debug.LogWarning($"Failed to write to {fullPath} with exception {e}");
             return false;
         }
     }
@@ -56,7 +56,7 @@ public static class SaveDataManager
         }
         catch (Exception e)
         {
-            Debug.LogError($"Failed to read from {fullPath} with exception {e}");
+            Debug.LogWarning($"Failed to read from {fullPath} with exception {e}");
             result = "";
             return false;
         }
