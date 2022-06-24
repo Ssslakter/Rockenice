@@ -7,7 +7,7 @@ using UnityEngine.Localization.Components;
 
 public class ScoreController : MonoBehaviour
 {   
-    public string score;
+    public static string score;
     public LocalizeStringEvent localizeStringEvent;
 
     private void Start()

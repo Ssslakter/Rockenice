@@ -183,4 +183,42 @@ public class Inventory : MonoBehaviour
             itemToBeAdded.gameObject.SetActive(false);
         }
     }
+
+
+
+
+    public void FormatInventory()
+    {
+        foreach (int id in Global.itemIds.Keys)
+        {
+            RemoveItemAmount(id, GetItemAmount(id));
+        }
+    }
+
+    public List<Item> SliceOfInventory()
+    {
+        List<Item> list = new List<Item>();
+
+        foreach (Slot i in slots)
+        {
+            if (i.transform.childCount > 2)
+            {
+                list.Add(i.transform.GetChild(2).GetComponent<Item>());
+            }
+        }
+
+        return list;
+    }
+
+    public void FillInventory(List<Item> items)
+    {
+        foreach(Item loadedItem in items)
+        {
+            AddItem(loadedItem);
+        }
+    }
+
+
+
+
 }
