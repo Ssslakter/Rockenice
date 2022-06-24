@@ -111,6 +111,10 @@ MonoBehaviour:
     m_Key: Planks
     m_Metadata:
       m_Items: []
+  - m_Id: 553891819225088
+    m_Key: Save
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -22,12 +22,19 @@ public class MenuContoller : MonoBehaviour
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[saveData.currentLanguage];
     }
 
-    public void Play()
+    public void NewGame()
+    {
+        saveData.playerPosition = SaveData.Default.playerPosition;
+        saveData.maxScore = SaveData.Default.maxScore;
+        saveData.hp = SaveData.Default.hp;
+        SaveDataManager.SaveJsonData(saveData);
+        SceneManager.LoadScene(sceneWhereToGo);
+    }
+    public void LoadGame()
     {
         SaveDataManager.SaveJsonData(saveData);
         SceneManager.LoadScene(sceneWhereToGo);
     }
-
 
     public void Exit()
     {

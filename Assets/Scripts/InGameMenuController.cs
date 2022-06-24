@@ -8,6 +8,7 @@ public class InGameMenuController : MenuContoller
     public GameObject settingMenu;
     public GameObject crosshair;
 
+
     public void Unpause()
     {
         gameIsPaused = false;
@@ -23,12 +24,15 @@ public class InGameMenuController : MenuContoller
     }
     private void Start()
     {
+        Global.player.transform.position = saveData.playerPosition;
+        ScoreController.score = saveData.maxScore;
+        HealthBar.hp = saveData.hp;
         gameIsPaused = false;
         PauseGame();
     }
     public void StopPlaying()
     {
-        SaveDataManager.SaveJsonData(saveData);
+        SaveProgress();
         SceneManager.LoadScene(sceneWhereToGo);
     }
     void PauseGame()
@@ -48,5 +52,12 @@ public class InGameMenuController : MenuContoller
         settingMenu.SetActive(gameIsPaused);
         crosshair.SetActive(!gameIsPaused);
         AudioListener.pause = gameIsPaused;
+    }
+
+    public void SaveProgress()
+    {
+        saveData.playerPosition = Global.player.transform.position;
+        saveData.maxScore = ScoreController.score;
+        SaveDataManager.SaveJsonData(saveData);
     }
 }

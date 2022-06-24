@@ -26,7 +26,7 @@ public static class SaveDataManager
 
             return sd;
         }
-        return SaveData.Default();
+        return SaveData.Default;
     }
 
     private static bool WriteToFile(string a_FileName, string a_FileContents)

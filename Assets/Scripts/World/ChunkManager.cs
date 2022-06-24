@@ -103,6 +103,7 @@ public class ChunkManager : MonoBehaviour
             }
             meshObject.transform.localPosition = (Vector3)position + shift;
             meshObject.transform.localRotation = Quaternion.identity;
+            meshObject.layer = LayerMask.NameToLayer("whatIsWall");
 
             chunkMesh = meshObject.AddComponent<ChunkMesh>();
             chunkMesh.meshFilter = meshObject.AddComponent<MeshFilter>();
