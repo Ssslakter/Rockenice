@@ -13,7 +13,7 @@ public class Climbing : MonoBehaviour
 
     [Header("Climbing")]
     public float climbSpeed;
-    public float maxClimbTime;
+    //public float maxClimbTime;
     private float climbTimer;
 
     private bool climbing;
@@ -44,6 +44,11 @@ public class Climbing : MonoBehaviour
     public float exitWallTime;
     private float exitWallTimer;
 
+    //private void Start()
+    //{
+    //    climbTimer = Global.player.GetComponent<RigidbodyFirstPersonController>().movementSettings.stamina;
+    //}
+
     private void Update()
     {
         WallCheck();
@@ -57,11 +62,15 @@ public class Climbing : MonoBehaviour
         // State 1 - Climbing
         if (wallFront && Input.GetKey(KeyCode.W) && wallLookAngle < maxWallLookAngle && !exitingWall)
         {
-            if (!climbing && climbTimer > 0) StartClimbing();
+            if (!climbing && Global.player.GetComponent<RigidbodyFirstPersonController>().movementSettings.stamina > 0) StartClimbing();
 
             // timer
-            if (climbTimer > 0) climbTimer -= Time.deltaTime;
-            if (climbTimer < 0) StopClimbing();
+            if (Global.player.GetComponent<RigidbodyFirstPersonController>().movementSettings.stamina > 0)
+            {
+                Global.player.GetComponent<RigidbodyFirstPersonController>().movementSettings.stamina -= Global.player.GetComponent<RigidbodyFirstPersonController>().movementSettings.staminaMultiplier * Time.deltaTime;
+                Global.player.GetComponent<RigidbodyFirstPersonController>().movementSettings.UpdateStaminaText();
+            }
+            if (Global.player.GetComponent<RigidbodyFirstPersonController>().movementSettings.stamina < 0) StopClimbing();
         }
 
         // State 2 - Exiting
@@ -91,7 +100,7 @@ public class Climbing : MonoBehaviour
 
         if ((wallFront && newWall) || player.Grounded)
         {
-            climbTimer = maxClimbTime;
+            //climbTimer = maxClimbTime;
             climbJumpsLeft = climbJumps;
         }
     }
