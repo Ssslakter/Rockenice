@@ -48,8 +48,9 @@ public class ChunkMesh : MonoBehaviour
         mesh = data.GenerateMesh(heightMap, heightMultiplier);
         if (isCheckpoint)
         {
-            SpawnObjects();
+            SpawnBigObjects();
         }
+        SpawnSmallObjects();
         meshRenderer.material.mainTexture = GenerateColorMap(snowMap, mesh.normals);
         meshFilter.mesh = mesh;
         meshCollider.sharedMesh = mesh;
@@ -86,41 +87,55 @@ public class ChunkMesh : MonoBehaviour
         return texture;
     }
 
-    public void SpawnObjects()
+    public void SpawnBigObjects()
     {
         foreach (GameObject item in Global.prefabs)
         {
-            for (int i = 0; i < Random.Range(0, 4); i++)
+            for (int i = 0; i < Random.Range(0, 5); i++)
             {
                 GameObject obj = Instantiate(item);
+                obj.transform.localScale = Vector3.one * 2;
+                SpawnObjectRandomly(obj, 0.001f);
+            }
+        }
+    }
+
+    private void SpawnSmallObjects()
+    {
+        foreach (GameObject item in Global.prefabsInteractable)
+        {
+            for (int i = 0; i < Random.Range(0, 5); i++)
+            {
+                GameObject obj = Instantiate(item);
+                Item itemScript = obj.AddComponent<Item>();
+                itemScript.itemID = Global.nameToId[item.name];
                 Outline outline = obj.AddComponent<Outline>();
-                outline.OutlineColor = Color.black;
-                outline.OutlineWidth = 10;
-                outline.OutlineMode = Outline.Mode.OutlineAll;
-                SpawnObjectRandomly(obj, 0.1f);
+                outline.OutlineMode = Outline.Mode.OutlineVisible;
+                SpawnObjectRandomly(obj, 0.05f);
             }
         }
     }
 
     private void SpawnObjectRandomly(GameObject gameObject, float flatnessCoef)
     {
-        ///<summary>
-        ///This is a description of my function.
-        ///</summary>
-        ///<param name="flatnessCoef">flatnessCoef: 0 - Генерация на плоскости(чекпоинт) 1 - где угодно</param>
+        //flatnessCoef: 0 - где угодно 1 - на плоскости
+
         float dotProduct;
+        int cnt = 0;
+        flatnessCoef = flatnessCoef <= 1e-5f ? flatnessCoef + 1e-5f : flatnessCoef - 1e-5f;
         int randomIndex = Random.Range(0, mesh.vertices.Length), spawnPlace = randomIndex;
         do
         {
             randomIndex = Random.Range(0, mesh.vertices.Length);
-            dotProduct = Vector3.Dot(mesh.normals[randomIndex], Vector3.up);
-            spawnPlace = dotProduct > Vector3.Dot(mesh.normals[spawnPlace], Vector3.up) ? randomIndex : spawnPlace;
+            dotProduct = mesh.normals[randomIndex].normalized.y;
+            spawnPlace = dotProduct > mesh.normals[spawnPlace].normalized.y ? randomIndex : spawnPlace;
+            cnt++;
         }
-        while (dotProduct > flatnessCoef + 1e-5);
+        while (dotProduct < flatnessCoef || cnt >= 1000);
 
         gameObject.transform.parent = transform;
         gameObject.transform.localPosition = mesh.vertices[spawnPlace];
-        gameObject.transform.rotation = Quaternion.LookRotation(Vector3.forward, mesh.normals[spawnPlace]);
+        gameObject.transform.rotation = Quaternion.LookRotation(Vector3.forward * Random.Range(-1, 1) + Vector3.right * Random.Range(0.1f, 1), (mesh.normals[spawnPlace].normalized + 1.5f * Vector3.up) / 2f);
     }
 
 }

@@ -79,6 +79,38 @@ MonoBehaviour:
     m_Key: Score
     m_Metadata:
       m_Items: []
+  - m_Id: 382556853829632
+    m_Key: Stick
+    m_Metadata:
+      m_Items: []
+  - m_Id: 391046745882624
+    m_Key: Orange
+    m_Metadata:
+      m_Items: []
+  - m_Id: 398462266966016
+    m_Key: Stone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 398571763466240
+    m_Key: Bow
+    m_Metadata:
+      m_Items: []
+  - m_Id: 419325196435456
+    m_Key: Mushroom
+    m_Metadata:
+      m_Items: []
+  - m_Id: 419448236343296
+    m_Key: Campfire
+    m_Metadata:
+      m_Items: []
+  - m_Id: 419768572116992
+    m_Key: Scrap
+    m_Metadata:
+      m_Items: []
+  - m_Id: 419890471174144
+    m_Key: Planks
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

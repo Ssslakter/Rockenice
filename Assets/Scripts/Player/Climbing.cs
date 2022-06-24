@@ -67,7 +67,7 @@ public class Climbing : MonoBehaviour
             // timer
             if (Global.player.GetComponent<RigidbodyFirstPersonController>().movementSettings.stamina > 0)
             {
-                Global.player.GetComponent<RigidbodyFirstPersonController>().movementSettings.stamina -= Global.player.GetComponent<RigidbodyFirstPersonController>().movementSettings.staminaMultiplier * Time.deltaTime;
+                Global.player.GetComponent<RigidbodyFirstPersonController>().movementSettings.stamina -= Global.player.GetComponent<RigidbodyFirstPersonController>().movementSettings.staminaMultiplier * 4 * Time.deltaTime;
                 Global.player.GetComponent<RigidbodyFirstPersonController>().movementSettings.UpdateStaminaText();
             }
             if (Global.player.GetComponent<RigidbodyFirstPersonController>().movementSettings.stamina < 0) StopClimbing();

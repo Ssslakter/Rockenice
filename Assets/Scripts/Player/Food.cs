@@ -8,6 +8,8 @@ public class Food : MonoBehaviour
     private int idFood;
     public KeyCode keyForEat;
     public Inventory inventory;
+    public HealthBar health;
+    public UnityStandardAssets.Characters.FirstPerson.RigidbodyFirstPersonController player;
 
     private void Start()
     {
@@ -20,6 +22,9 @@ public class Food : MonoBehaviour
         if (Input.GetKeyDown(keyForEat))
         {
             inventory.RemoveItemAmount(idFood, 1);
+
+            health.AddHealth(nutritionalValue);
+            player.movementSettings.AddStamina(nutritionalValue);
 
             Debug.Log("Скушано");
 

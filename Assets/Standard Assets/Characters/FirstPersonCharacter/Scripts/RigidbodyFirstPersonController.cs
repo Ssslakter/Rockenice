@@ -92,6 +92,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     staminaText.gameObject.transform.parent.gameObject.SetActive(true);
                 }
             }
+
+            public void AddStamina(float parse)
+            {
+                stamina = Mathf.Min(100f, stamina + parse);
+            }
 #endif
         }
 
@@ -215,6 +220,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 
             m_Jump = false;
+
 
             if (Grounded && movementSettings.stamina < 100f && !Input.GetKey(movementSettings.RunKey))
             {

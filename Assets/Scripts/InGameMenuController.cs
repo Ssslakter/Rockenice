@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using TMPro;
 
 public class InGameMenuController : MenuContoller
 {
     public static bool gameIsPaused;
     public GameObject settingMenu;
     public GameObject crosshair;
+    public Inventory inventory;
 
     public void Unpause()
     {
@@ -33,8 +34,16 @@ public class InGameMenuController : MenuContoller
     }
     void PauseGame()
     {
+        settingMenu.SetActive(gameIsPaused);
+        crosshair.SetActive(!gameIsPaused);
+        AudioListener.pause = gameIsPaused;
+
         if (gameIsPaused)
         {
+            if (inventory.gameObject.activeSelf == true)
+            {
+                inventory.InventoryCloses();
+            }
             Time.timeScale = 0f;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -44,9 +53,14 @@ public class InGameMenuController : MenuContoller
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             Time.timeScale = 1;
+            crosshair.transform.GetChild(0).GetComponent<TMP_Text>().text = "";
         }
-        settingMenu.SetActive(gameIsPaused);
-        crosshair.SetActive(!gameIsPaused);
-        AudioListener.pause = gameIsPaused;
+
+    }
+
+    public override void ChangeLanguage()
+    {
+        base.ChangeLanguage();
+        crosshair.transform.GetChild(0).GetComponent<TMP_Text>().text = "";
     }
 }

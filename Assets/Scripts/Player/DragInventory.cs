@@ -13,7 +13,7 @@ public class DragInventory : MonoBehaviour
 
     public Image followMouseImage;
 
-    void Update()
+    void FixedUpdate()
     {
 
         if (Input.GetKeyDown(KeyCode.Q))
@@ -38,7 +38,7 @@ public class DragInventory : MonoBehaviour
             if (curSlot && curSlot.GetComponent<Slot>().slotsItem)
             {
                 followMouseImage.color = new Color(255, 255, 255, 255);
-                followMouseImage.sprite = curSlot.GetComponent<Image>().sprite;
+                followMouseImage.sprite = curSlot.transform.GetChild(1).GetComponent<Image>().sprite;
             }
         }
         else if (Input.GetMouseButtonUp(0))
@@ -49,8 +49,6 @@ public class DragInventory : MonoBehaviour
                 GameObject newObj = GetObjectUnderMouse();
                 if (newObj && newObj != curSlot)
                 {
-                    if (newObj.GetComponent<EquipmentSlot>() && newObj.GetComponent<EquipmentSlot>().equipmentType != curSlotsItem.equipmentType)
-                        return;
 
                     if (newObj.GetComponent<Slot>().slotsItem)
                     {
@@ -71,10 +69,6 @@ public class DragInventory : MonoBehaviour
                         curSlotsItem.transform.parent = newObj.transform;
                     }
                 }
-            }
-            foreach (Slot i in inv.equipSlots)
-            {
-                i.GetComponent<EquipmentSlot>().Equip();
             }
         }
         else
