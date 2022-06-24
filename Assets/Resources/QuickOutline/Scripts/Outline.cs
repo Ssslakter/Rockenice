@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 [DisallowMultipleComponent]
 
@@ -146,11 +148,16 @@ public class Outline : MonoBehaviour {
 
     private void OnMouseEnter()
     {
-        outline.enabled = true;
+        if (Vector3.Distance(gameObject.transform.position, Global.player.transform.position) < 3f)
+        {
+            outline.enabled = true;
+            Global.signForItems.GetComponent<TMP_Text>().text = Global.itemIds[gameObject.GetComponent<Item>().itemID];
+        }
     }
-    private void OnMouseExit()
+    public void OnMouseExit()
     {
         outline.enabled = false;
+        Global.signForItems.GetComponent<TMP_Text>().text = "";
     }
 
     void OnDisable() {

@@ -15,23 +15,11 @@ public class MenuContoller : MonoBehaviour
     private void Awake()
     {
         LocalizationSettings.InitializationOperation.WaitForCompletion();
-        try
-        {
-            saveData = SaveDataManager.LoadJsonData();
-            volumeSlider.value = saveData.volume;
-            AudioListener.volume = saveData.volume;
-            ChangeFullscreen(saveData.fullScreenMode);
-            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[saveData.currentLanguage];
-        }
-        catch (System.Exception)
-        {
-            saveData = SaveData.Default();
-            volumeSlider.value = saveData.volume;
-            AudioListener.volume = saveData.volume;
-            ChangeFullscreen(saveData.fullScreenMode);
-            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[saveData.currentLanguage];
-        }
-
+        saveData = SaveDataManager.LoadJsonData();
+        volumeSlider.value = saveData.volume;
+        AudioListener.volume = saveData.volume;
+        ChangeFullscreen(saveData.fullScreenMode);
+        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[saveData.currentLanguage];
     }
 
     public void Play()

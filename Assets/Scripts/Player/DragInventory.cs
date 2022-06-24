@@ -20,7 +20,12 @@ public class DragInventory : MonoBehaviour
         {
             GameObject obj = GetObjectUnderMouse();
             if (obj)
+            {
+                //obj.GetComponent<Item>().amountInStack -= 1;
+                //Instantiate(obj).GetComponent<Slot>().DropItem();
                 obj.GetComponent<Slot>().DropItem();
+            }
+
         }
 
         if (Input.GetMouseButtonDown(0))

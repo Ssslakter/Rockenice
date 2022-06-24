@@ -19,7 +19,7 @@ public class Inventory : MonoBehaviour
     {
         inventoryObject.SetActive(false);
 
-        foreach (Slot i in slots)
+        foreach(Slot i in slots)
         {
             i.CustomStart();
         }
@@ -58,9 +58,11 @@ public class Inventory : MonoBehaviour
             if (Physics.Raycast(ray, out hit, distance))
             {
                 if (hit.collider.gameObject.GetComponent<Item>())
+                {
                     AddItem(hit.collider.gameObject.GetComponent<Item>());
-
+                    hit.collider.gameObject.GetComponent<Outline>().OnMouseExit();
             }
+        }
         }
 
         foreach (Slot i in slots)
@@ -72,7 +74,7 @@ public class Inventory : MonoBehaviour
     public int GetItemAmount(int id)
     {
         int num = 0;
-        foreach (Slot i in slots)
+        foreach(Slot i in slots)
         {
             if (i.slotsItem)
             {
@@ -86,9 +88,9 @@ public class Inventory : MonoBehaviour
 
     public void RemoveItemAmount(int id, int amountToRemove)
     {
-        List<Slot> list = new List<Slot>();
+        List<Slot> list = new List<Slot> ();
 
-        foreach (Slot i in slots)
+        foreach(Slot i in slots)
         {
             if (amountToRemove <= 0)
                 return;
@@ -117,6 +119,8 @@ public class Inventory : MonoBehaviour
             {
                 z.amountInStack -= amountToRemove;
                 amountToRemove = 0;
+                
+                break;
             }
         }
         foreach (Slot i in slots)
@@ -151,7 +155,7 @@ public class Inventory : MonoBehaviour
         foreach (Item i in stackableItems)
         {
             int amountThatCanbeAdded = i.maxStackSize - i.amountInStack;
-            if (amountInStack <= amountThatCanbeAdded)
+            if(amountInStack <= amountThatCanbeAdded)
             {
                 i.amountInStack += amountInStack;
                 Destroy(itemToBeAdded.gameObject);
@@ -165,7 +169,7 @@ public class Inventory : MonoBehaviour
         }
 
         itemToBeAdded.amountInStack = amountInStack;
-        if (emptySlots.Count > 0)
+        if(emptySlots.Count > 0)
         {
             itemToBeAdded.transform.parent = emptySlots[0].transform;
             itemToBeAdded.gameObject.SetActive(false);

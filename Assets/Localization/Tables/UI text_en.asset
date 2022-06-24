@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: en
   m_SharedData: {fileID: 11400000, guid: d03cb6fd91b543f42a0d851db678a2d8, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 2864722018281455618
   m_TableData:
   - m_Id: 43882971136
     m_Localized: Back
@@ -78,6 +79,15 @@ MonoBehaviour:
     m_Localized: You are dead
     m_Metadata:
       m_Items: []
+  - m_Id: 299153133719552
+    m_Localized: 'Max score: {score.score}'
+    m_Metadata:
+      m_Items:
+      - rid: 2864722018281455618
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 2864722018281455618
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00d0440414100100
