@@ -94,12 +94,10 @@ public class ChunkManager : MonoBehaviour
             if (worldPosition.y > 0)
             {
                 shift = parameters.localCheckpointWidth * new Vector3(0, 0, Mathf.FloorToInt((worldPosition.y + checkpointPeriod - 1) / checkpointPeriod));
-
             }
             else
             {
                 shift = parameters.localCheckpointWidth * new Vector3(0, 0, Mathf.FloorToInt(worldPosition.y / checkpointPeriod));
-
             }
             meshObject.transform.localPosition = (Vector3)position + shift;
             meshObject.transform.localRotation = Quaternion.identity;
