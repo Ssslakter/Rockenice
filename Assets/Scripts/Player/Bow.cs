@@ -13,6 +13,7 @@ public class Bow : MonoBehaviour
     public GameObject arrow;
     public GameObject bowString;
     public GameObject stringRoot;
+    public Inventory inventory;
 
     Arrow currentArrow;
 
@@ -32,17 +33,26 @@ public class Bow : MonoBehaviour
     {
         if ((int)Input.GetAxisRaw("Fire1") == 1)
         {
+
             if (!charging)
             {
                 //взятие стрелы
-                charging = true;
-                currentArrow = StartCharging();
-                bowString.transform.parent = currentArrow.transform;
-                bowString.transform.localPosition += Vector3.back / 2f;
+                if (inventory.GetItemAmount(currentArrow.gameObject.GetComponent<Item>().itemID) > 0)
+                {
+                    charging = true;
+                    currentArrow = StartCharging();
+                    bowString.transform.parent = currentArrow.transform;
+                    bowString.transform.localPosition += Vector3.back / 2f;
+                }
             }
-            //натяжение лука
-            tension = Mathf.Min(tension + Time.deltaTime, maxChargeTimeSec);
-            currentArrow.transform.localPosition = Vector3.back * Mathf.Lerp(-maxBackwardPosition, maxForwardPosition, tension / maxChargeTimeSec);
+
+            if (charging)
+            {
+                //натяжение лука
+                tension = Mathf.Min(tension + Time.deltaTime, maxChargeTimeSec);
+                currentArrow.transform.localPosition = Vector3.back * Mathf.Lerp(-maxBackwardPosition, maxForwardPosition, tension / maxChargeTimeSec);
+            }
+
         }
         else
         {
@@ -58,6 +68,7 @@ public class Bow : MonoBehaviour
                 else
                 {
                     //стреляем
+                    inventory.RemoveItemAmount(currentArrow.gameObject.GetComponent<Item>().itemID, 1);
                     Shoot(tension, currentArrow);
                 }
                 charging = false;

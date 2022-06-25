@@ -111,6 +111,10 @@ MonoBehaviour:
     m_Key: Planks
     m_Metadata:
       m_Items: []
+  - m_Id: 666425736089600
+    m_Key: Red mushroom
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

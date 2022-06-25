@@ -116,6 +116,10 @@ MonoBehaviour:
     m_Localized: Planks
     m_Metadata:
       m_Items: []
+  - m_Id: 666425736089600
+    m_Localized: Red mushroom
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
