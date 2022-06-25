@@ -120,6 +120,18 @@ MonoBehaviour:
     m_Localized: Save progress
     m_Metadata:
       m_Items: []
+  - m_Id: 670871465295872
+    m_Localized: World mode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 671157667823616
+    m_Localized: Infinite
+    m_Metadata:
+      m_Items: []
+  - m_Id: 671278308589568
+    m_Localized: Finite
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

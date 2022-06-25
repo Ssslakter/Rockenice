@@ -20,17 +20,17 @@ public class SnowSystem : MonoBehaviour
     void Update()
     {
         transform.position = player.position + Vector3.up * 20;
-        if (Random.Range(0, 800) == 30 && blizzardStarted && peakVal)
+        if (Random.Range(0, 2000) == 310 && blizzardStarted && peakVal)
         {
             blizzardStarted = false;
         }
-        if (Random.Range(0, 800) == 44 && !blizzardStarted && peakVal)
+        if (Random.Range(0, 2000) == 404 && !blizzardStarted && peakVal)
         {
             blizzardStarted = true;
         }
         if (blizzardStarted)
         {
-            source.volume = Mathf.Min(0.4f, source.volume + Time.deltaTime / 40);
+            source.volume = Mathf.Min(0.5f, source.volume + Time.deltaTime / 40);
             fog.fogDensity = Mathf.Min(0.08f, fog.fogDensity + Time.deltaTime / 500);
             if (fog.fogDensity > 0.01f)
             {

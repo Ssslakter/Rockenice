@@ -10,7 +10,7 @@ public class MenuContoller : MonoBehaviour
     public Slider volumeSlider;
     public GameObject[] screenTypes = new GameObject[3];
     protected SaveData saveData;
-
+    public bool isFinite = true;
 
     private void Awake()
     {
@@ -27,12 +27,17 @@ public class MenuContoller : MonoBehaviour
         saveData.playerPosition = SaveData.Default.playerPosition;
         saveData.maxScore = SaveData.Default.maxScore;
         saveData.hp = SaveData.Default.hp;
+        saveData.isFiniteWorld = isFinite;
         SaveDataManager.SaveJsonData(saveData);
         SceneManager.LoadScene(sceneWhereToGo);
     }
     public void LoadGame()
     {
         SaveDataManager.SaveJsonData(saveData);
+        if (saveData.isFiniteWorld != isFinite)
+        {
+            saveData = SaveData.Default;
+        }
         SceneManager.LoadScene(sceneWhereToGo);
     }
 
@@ -72,6 +77,21 @@ public class MenuContoller : MonoBehaviour
                 LocalizationSettings.SelectedLocale = aLocale;
                 break;
             }
+        }
+    }
+
+    public void ChangeWorldMode()
+    {
+        isFinite = !isFinite;
+        if (isFinite)
+        {
+            isFinite = false;
+            sceneWhereToGo = "SampleScene";
+        }
+        else
+        {
+            isFinite = true;
+            sceneWhereToGo = "DemoVersion";
         }
     }
 }

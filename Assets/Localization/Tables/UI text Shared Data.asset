@@ -115,6 +115,18 @@ MonoBehaviour:
     m_Key: Save
     m_Metadata:
       m_Items: []
+  - m_Id: 670871465295872
+    m_Key: Mode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 671157667823616
+    m_Key: Inifinite
+    m_Metadata:
+      m_Items: []
+  - m_Id: 671278308589568
+    m_Key: finite
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -10,6 +10,7 @@ public class SaveData
     public Vector3 playerPosition;
     public string maxScore;
     public float hp;
+    public bool isFiniteWorld;
 
     public string ToJson()
     {
@@ -30,6 +31,7 @@ public class SaveData
         instance.fullScreenMode = 0;
         instance.currentLanguage = 0;
         instance.hp = 1;
+        instance.isFiniteWorld = true;
         return instance;
     }
 }

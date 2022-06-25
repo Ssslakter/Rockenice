@@ -62,7 +62,14 @@ public class ChunkManagerLite : MonoBehaviour
     {
         GameObject wall = GameObject.CreatePrimitive(PrimitiveType.Plane);
         wall.transform.rotation = Quaternion.Euler(0, 0, 90);
+        wall.transform.localScale = Vector3.one * 1000;
         wall.transform.position = coordinates;
+        wall.GetComponent<MeshRenderer>().enabled = false;
+        GameObject wall1 = GameObject.CreatePrimitive(PrimitiveType.Plane);
+        wall1.transform.rotation = Quaternion.Euler(0, 0, -90);
+        wall1.transform.localScale = Vector3.one * 1000;
+        wall1.transform.position = -coordinates;
+        wall1.GetComponent<MeshRenderer>().enabled = false;
     }
 
     void SpawnAllChunks()
@@ -73,13 +80,13 @@ public class ChunkManagerLite : MonoBehaviour
 
         for (int x = -numberOfVisibleChunks; x <= numberOfVisibleChunks; x++)
         {
-            for (int y = 0; y <= 4 * numberOfVisibleChunks; y++)
+            for (int y = -numberOfVisibleChunks; y <= 4 * numberOfVisibleChunks; y++)
             {
                 Vector2Int worldPos = new Vector2Int(x + currX, y + currY);
                 chunkDictionary.Add(worldPos, new Chunk(worldPos, transform, checkpointPeriod, chunkParams));
             }
         }
-        SpawnBorders(playerPosition);
+        SpawnBorders(new Vector3(numberOfVisibleChunks * chunkParams.chunkLength, 0, 0));
     }
 
     [System.Serializable]
