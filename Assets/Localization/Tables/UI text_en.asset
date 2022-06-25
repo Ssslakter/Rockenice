@@ -116,20 +116,28 @@ MonoBehaviour:
     m_Localized: Planks
     m_Metadata:
       m_Items: []
-  - m_Id: 553891819225088
-    m_Localized: Save progress
+  - m_Id: 666425736089600
+    m_Localized: Red mushroom
     m_Metadata:
       m_Items: []
-  - m_Id: 670871465295872
-    m_Localized: World mode
+  - m_Id: 685695834324992
+    m_Localized: World Mode
     m_Metadata:
       m_Items: []
-  - m_Id: 671157667823616
+  - m_Id: 685785927974912
     m_Localized: Infinite
     m_Metadata:
       m_Items: []
-  - m_Id: 671278308589568
+  - m_Id: 685973191065600
     m_Localized: Finite
+    m_Metadata:
+      m_Items: []
+  - m_Id: 686413563625472
+    m_Localized: Save
+    m_Metadata:
+      m_Items: []
+  - m_Id: 686521638256640
+    m_Localized: Save
     m_Metadata:
       m_Items: []
   references:
