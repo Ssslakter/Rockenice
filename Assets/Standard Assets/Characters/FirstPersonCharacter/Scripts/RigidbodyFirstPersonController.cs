@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
-
+using UnityEngine.UI;
+using TMPro;
 
 namespace UnityStandardAssets.Characters.FirstPerson
 {
@@ -8,9 +9,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
     [RequireComponent(typeof(CapsuleCollider))]
     public class RigidbodyFirstPersonController : MonoBehaviour
     {
+
         [Serializable]
+
         public class MovementSettings
         {
+            public float stamina = 100f;
+            public float staminaMultiplier = 2f;
+            public Image staminaImage;
+            public TMP_Text staminaText;
+
             public float ForwardSpeed = 8.0f;   // Speed when walking forward
             public float BackwardSpeed = 4.0f;  // Speed when walking backwards
             public float StrafeSpeed = 4.0f;    // Speed when walking sideways
@@ -22,6 +30,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 #if !MOBILE_INPUT
             private bool m_Running;
+            public bool lastTimeSprint = false;
 #endif
 
             public void UpdateDesiredTargetSpeed(Vector2 input)
@@ -44,13 +53,21 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     CurrentTargetSpeed = ForwardSpeed;
                 }
 #if !MOBILE_INPUT
-                if (Input.GetKey(RunKey))
+                if (Input.GetKey(RunKey) && stamina > 0f)
                 {
+                    lastTimeSprint = true;
                     CurrentTargetSpeed *= RunMultiplier;
+                    stamina -= staminaMultiplier * Time.deltaTime;
+                    UpdateStaminaText();
                     m_Running = true;
                 }
                 else
                 {
+                    if (stamina <= 0f)
+                    {
+                        CurrentTargetSpeed /= RunMultiplier;
+                        lastTimeSprint = false;
+                    }
                     m_Running = false;
                 }
 #endif
@@ -60,6 +77,25 @@ namespace UnityStandardAssets.Characters.FirstPerson
             public bool Running
             {
                 get { return m_Running; }
+            }
+
+            public void UpdateStaminaText()
+            {
+                staminaText.text = Mathf.Ceil(stamina).ToString();
+                staminaImage.fillAmount = stamina / 100;
+                if (stamina >= 100f)
+                {
+                    staminaText.gameObject.transform.parent.gameObject.SetActive(false);
+                }
+                else
+                {
+                    staminaText.gameObject.transform.parent.gameObject.SetActive(true);
+                }
+            }
+
+            public void AddStamina(float parse)
+            {
+                stamina = Mathf.Min(100f, stamina + parse);
             }
 #endif
         }
@@ -87,7 +123,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_YRotation;
         private Vector3 m_GroundContactNormal;
         private bool m_Jump, m_PreviouslyGrounded, m_Jumping, m_IsGrounded;
-
 
         public Vector3 Velocity
         {
@@ -128,9 +163,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void Update()
         {
             RotateView();
-
-            if (Input.GetButtonDown("Jump") && !m_Jump)
+            if (Input.GetButtonDown("Jump") && movementSettings.stamina > 10f && Grounded)
             {
+                movementSettings.stamina -= 10f;
+                movementSettings.UpdateStaminaText();
                 m_Jump = true;
             }
         }
@@ -182,7 +218,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     StickToGroundHelper();
                 }
             }
+
             m_Jump = false;
+
+
+            if (Grounded && movementSettings.stamina < 100f && !Input.GetKey(movementSettings.RunKey))
+            {
+                movementSettings.stamina += movementSettings.staminaMultiplier / 30f;
+                movementSettings.UpdateStaminaText();
+            }
         }
 
 

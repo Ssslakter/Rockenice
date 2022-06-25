@@ -64,7 +64,7 @@ public class MenuContoller : MonoBehaviour
         saveData.fullScreenMode = type;
     }
 
-    public void ChangeLanguage()
+    public virtual void ChangeLanguage()
     {
         int nextLanguage = (saveData.currentLanguage + 1) % LocalizationSettings.AvailableLocales.Locales.Count;
         LocaleIdentifier localeCode = LocalizationSettings.AvailableLocales.Locales[nextLanguage].Identifier;

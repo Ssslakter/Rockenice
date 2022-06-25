@@ -163,7 +163,7 @@ public class Outline : MonoBehaviour
 
             UpdateMaterialProperties();
         }
-        if (Vector3.Distance(gameObject.transform.position, Global.player.transform.position) >= 3f)
+        if (Vector3.Distance(gameObject.transform.position, Global.player.transform.position) >= 2f)
         {
             outline.enabled = false;
             Global.signForItems.GetComponent<TMP_Text>().text = "";
@@ -172,7 +172,7 @@ public class Outline : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (Vector3.Distance(gameObject.transform.position, Global.player.transform.position) < 3f)
+        if (Vector3.Distance(gameObject.transform.position, Global.player.transform.position) < 2f)
         {
             outline.enabled = true;
             Global.signForItems.GetComponent<LocalizeStringEvent>().StringReference = Global.itemIds[gameObject.GetComponent<Item>().itemID];

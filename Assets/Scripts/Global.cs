@@ -28,7 +28,6 @@ public class Global : MonoBehaviour
         {"SM_Woods_02" , 6}
     };
 
-
     static public Dictionary<int, LocalizedString> itemIds = new Dictionary<int, LocalizedString> {
         { 0, new LocalizedString("UI text","Stone") },
         { 1,new LocalizedString("UI text","Stick") },
@@ -39,6 +38,7 @@ public class Global : MonoBehaviour
         { 6,new LocalizedString("UI text","Planks") },
         { 10,new LocalizedString("UI text","Orange") }
     };
+
     static public Dictionary<int, FullScreenMode> screenModes = new Dictionary<int, FullScreenMode>
     {
 

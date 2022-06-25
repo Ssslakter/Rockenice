@@ -10,7 +10,7 @@ public class Item : MonoBehaviour
     public Sprite itemSprite;
     [Space]
     public int amountInStack = 1;
-    public int maxStackSize = 64;
+    public int maxStackSize = 10;
     [Space]
     public int itemID;
 }

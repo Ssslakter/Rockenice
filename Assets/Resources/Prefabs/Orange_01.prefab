@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 018500ea6c768b44699691d525cabfaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipmentType: Orange
+  equipmentType: Food
   equipmentIndex: 1
   itemSprite: {fileID: 21300000, guid: f3441799645fbce4aab311f39bcdfc71, type: 3}
   amountInStack: 1
