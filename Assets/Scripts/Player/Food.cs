@@ -21,7 +21,7 @@ public class Food : MonoBehaviour
         {
             inventory.RemoveItemAmount(idFood, 1);
 
-            Debug.Log("Скушано");
+            Debug.Log("РЎРєСѓС€Р°РЅРѕ");
 
             if (inventory.GetItemAmount(idFood) == 0)
             {

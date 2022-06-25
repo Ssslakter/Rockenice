@@ -33,7 +33,7 @@ public class Inventory : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if(inventoryObject.activeSelf == false)
+            if (inventoryObject.activeSelf == false)
             {
                 inventoryObject.SetActive(true);
                 aimPoint.SetActive(false);
@@ -58,17 +58,17 @@ public class Inventory : MonoBehaviour
             if (Physics.Raycast(ray, out hit, distance))
             {
                 if (hit.collider.gameObject.GetComponent<Item>())
+                {
                     AddItem(hit.collider.gameObject.GetComponent<Item>());
-
+                    hit.collider.gameObject.GetComponent<Outline>().OnMouseExit();
             }
         }
+        }
 
-        foreach(Slot i in slots)
+        foreach (Slot i in slots)
         {
             i.CheckForItem();
         }
-        //foreach (Slot i in equipSlots)
-        //i.CheckForItem();
     }
 
     public int GetItemAmount(int id)
@@ -119,6 +119,8 @@ public class Inventory : MonoBehaviour
             {
                 z.amountInStack -= amountToRemove;
                 amountToRemove = 0;
+                
+                break;
             }
         }
         foreach (Slot i in slots)

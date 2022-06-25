@@ -17,7 +17,7 @@ public class ChunkManager : MonoBehaviour
     Dictionary<Vector2, Chunk> chunkDictionary = new Dictionary<Vector2, Chunk>();
     List<Chunk> visibleLastUpdate = new List<Chunk>();
 
-    private void Awake()
+    private void Start()
     {
         transform.Rotate(steepness, 0, 0);
         numberOfVisibleChunks = Mathf.RoundToInt(viewRadius / chunkParams.chunkLength);
@@ -94,15 +94,14 @@ public class ChunkManager : MonoBehaviour
             if (worldPosition.y > 0)
             {
                 shift = parameters.localCheckpointWidth * new Vector3(0, 0, Mathf.FloorToInt((worldPosition.y + checkpointPeriod - 1) / checkpointPeriod));
-
             }
             else
             {
                 shift = parameters.localCheckpointWidth * new Vector3(0, 0, Mathf.FloorToInt(worldPosition.y / checkpointPeriod));
-
             }
             meshObject.transform.localPosition = (Vector3)position + shift;
             meshObject.transform.localRotation = Quaternion.identity;
+            meshObject.layer = LayerMask.NameToLayer("whatIsWall");
 
             chunkMesh = meshObject.AddComponent<ChunkMesh>();
             chunkMesh.meshFilter = meshObject.AddComponent<MeshFilter>();

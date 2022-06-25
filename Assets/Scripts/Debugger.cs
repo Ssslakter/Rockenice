@@ -6,9 +6,8 @@ public class Debugger : MonoBehaviour
 {
     GameObject[] prefabs;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        prefabs = Resources.LoadAll<GameObject>("Polygon-Lite Survival Collection/Prefabs");
         generate();
     }
 
@@ -30,5 +29,16 @@ public class Debugger : MonoBehaviour
         gameObject.transform.parent = transform;
         gameObject.transform.localPosition = position;
         gameObject.transform.rotation = Quaternion.identity;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            foreach (var item in Global.prefabs)
+            {
+                print(item);
+            }
+        }
     }
 }

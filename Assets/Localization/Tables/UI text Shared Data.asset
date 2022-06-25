@@ -1,0 +1,140 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: UI text Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: UI text
+  m_TableCollectionNameGuidString: d03cb6fd91b543f42a0d851db678a2d8
+  m_Entries:
+  - m_Id: 43882971136
+    m_Key: backText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2235247427584
+    m_Key: ResetProgress
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2359562403840
+    m_Key: Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2427921170432
+    m_Key: Windowed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2517444395008
+    m_Key: Fullscreen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2562088566784
+    m_Key: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2595663970304
+    m_Key: LoadGame
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2616526438400
+    m_Key: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2642304630784
+    m_Key: Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2741097267200
+    m_Key: NewGame
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20039212269568
+    m_Key: Borderless
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24105006989312
+    m_Key: CurLang
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24735687704576
+    m_Key: Screen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46978471886848
+    m_Key: LeaveToMenu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64488571207680
+    m_Key: DeadText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 299153133719552
+    m_Key: Score
+    m_Metadata:
+      m_Items: []
+  - m_Id: 382556853829632
+    m_Key: Stick
+    m_Metadata:
+      m_Items: []
+  - m_Id: 391046745882624
+    m_Key: Orange
+    m_Metadata:
+      m_Items: []
+  - m_Id: 398462266966016
+    m_Key: Stone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 398571763466240
+    m_Key: Bow
+    m_Metadata:
+      m_Items: []
+  - m_Id: 419325196435456
+    m_Key: Mushroom
+    m_Metadata:
+      m_Items: []
+  - m_Id: 419448236343296
+    m_Key: Campfire
+    m_Metadata:
+      m_Items: []
+  - m_Id: 419768572116992
+    m_Key: Scrap
+    m_Metadata:
+      m_Items: []
+  - m_Id: 419890471174144
+    m_Key: Planks
+    m_Metadata:
+      m_Items: []
+  - m_Id: 553891819225088
+    m_Key: Save
+    m_Metadata:
+      m_Items: []
+  - m_Id: 670871465295872
+    m_Key: Mode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 671157667823616
+    m_Key: Inifinite
+    m_Metadata:
+      m_Items: []
+  - m_Id: 671278308589568
+    m_Key: finite
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 6192256502379839512
+  references:
+    version: 2
+    RefIds:
+    - rid: 6192256502379839512
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1655972663480
