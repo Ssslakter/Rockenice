@@ -13,4 +13,14 @@ public class Item : MonoBehaviour
     public int maxStackSize = 10;
     [Space]
     public int itemID;
+
+    public void DropItem()
+    {
+        if (gameObject)
+        {
+            transform.parent = null;
+            gameObject.SetActive(true);
+            transform.position = Camera.main.transform.position + Camera.main.transform.forward;
+        }
+    }
 }

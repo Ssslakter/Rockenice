@@ -95,6 +95,8 @@ public class Outline : MonoBehaviour
 
     private bool needsUpdate;
 
+    private bool mouseOnItem;
+
     void Awake()
     {
         // Cache renderers
@@ -170,17 +172,34 @@ public class Outline : MonoBehaviour
         }
     }
 
-    private void OnMouseEnter()
+    private void OnMouseOver()
     {
-        if (Vector3.Distance(gameObject.transform.position, Global.player.transform.position) < 2f)
+        if (!mouseOnItem)
         {
-            outline.enabled = true;
-            Global.signForItems.GetComponent<LocalizeStringEvent>().StringReference = Global.itemIds[gameObject.GetComponent<Item>().itemID];
-            Global.signForItems.GetComponent<LocalizeStringEvent>().RefreshString();
+            if (Vector3.Distance(gameObject.transform.position, Global.player.transform.position) < 2f)
+            {
+                outline.enabled = true;
+                Global.signForItems.GetComponent<LocalizeStringEvent>().StringReference = Global.itemIds[gameObject.GetComponent<Item>().itemID];
+                Global.signForItems.GetComponent<LocalizeStringEvent>().RefreshString();
+                mouseOnItem = true;
+            }
+        }
+        else
+        {
+            if (Vector3.Distance(gameObject.transform.position, Global.player.transform.position) >= 2f)
+            {
+                OnMouseExit();
+            }
         }
     }
+
+    //private void OnMouseEnter()
+    //{
+    //    mouseOnItem = true;
+    //}
     public void OnMouseExit()
     {
+        mouseOnItem = false;
         outline.enabled = false;
         Global.signForItems.GetComponent<TMP_Text>().text = "";
     }

@@ -15,6 +15,9 @@ public class ArrowType : MonoBehaviour
     public GameObject[] slots;
     public GameObject[] arrows;
 
+    public TMP_Text first;
+    public TMP_Text second;
+
     private int type;
     void Start()
     {
@@ -44,11 +47,18 @@ public class ArrowType : MonoBehaviour
                 changeArrowTypeObj.SetActive(false);
             }
         }
+        UpdateText();
     }
 
     void ChangeArrow()
     {
         panel.transform.position = slots[type].transform.position;
         bow.arrow = arrows[type];
+    }
+
+    void UpdateText()
+    {
+        first.text = Global.player.GetComponent<Inventory>().GetItemAmount(arrows[0].GetComponent<Item>().itemID).ToString();
+        second.text = Global.player.GetComponent<Inventory>().GetItemAmount(arrows[1].GetComponent<Item>().itemID).ToString();
     }
 }

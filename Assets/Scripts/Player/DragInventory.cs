@@ -13,17 +13,25 @@ public class DragInventory : MonoBehaviour
 
     public Image followMouseImage;
 
-    void FixedUpdate()
+    void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.Q))
         {
             GameObject obj = GetObjectUnderMouse();
             if (obj)
             {
-                //obj.GetComponent<Item>().amountInStack -= 1;
-                //Instantiate(obj).GetComponent<Slot>().DropItem();
-                obj.GetComponent<Slot>().DropItem();
+                obj.GetComponent<Slot>().slotsItem.amountInStack -= 1;
+                if (obj.GetComponent<Slot>().slotsItem.amountInStack == 0)
+                {
+                    Destroy(obj.GetComponent<Slot>().slotsItem.gameObject);
+                }
+
+                obj.GetComponent<Slot>().CheckForItem();
+
+                GameObject dropItem = Instantiate(obj.GetComponent<Slot>().slotsItem.gameObject);
+
+                dropItem.GetComponent<Item>().amountInStack = 1;
+                dropItem.GetComponent<Item>().DropItem();
             }
 
         }
