@@ -12,6 +12,7 @@ public class SaveData
     public float hp;
     public bool isFiniteWorld;
     public int resolution;
+    public bool isSavedExists;
 
     public string ToJson()
     {
@@ -34,6 +35,7 @@ public class SaveData
         instance.hp = 1;
         instance.isFiniteWorld = true;
         instance.resolution = 0;
+        instance.isSavedExists = false;
         return instance;
     }
 }

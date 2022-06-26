@@ -136,12 +136,12 @@ MonoBehaviour:
     m_Localized: Save
     m_Metadata:
       m_Items: []
-  - m_Id: 686521638256640
-    m_Localized: Save
-    m_Metadata:
-      m_Items: []
   - m_Id: 1138315258560512
     m_Localized: Resolution
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1171726136311808
+    m_Localized: Reset progress
     m_Metadata:
       m_Items: []
   references:

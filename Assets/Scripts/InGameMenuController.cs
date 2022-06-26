@@ -65,8 +65,10 @@ public class InGameMenuController : MenuContoller
 
     public void SaveProgress()
     {
+        saveData.isSavedExists = true;
         saveData.playerPosition = Global.player.transform.position;
         saveData.maxScore = ScoreController.score;
+        saveData.hp = HealthBar.hp;
         SaveDataManager.SaveJsonData(saveData);
     }
 

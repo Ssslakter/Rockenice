@@ -131,12 +131,12 @@ MonoBehaviour:
     m_Key: Save
     m_Metadata:
       m_Items: []
-  - m_Id: 686521638256640
-    m_Key: Sav
-    m_Metadata:
-      m_Items: []
   - m_Id: 1138315258560512
     m_Key: Resolution
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1171726136311808
+    m_Key: Reset
     m_Metadata:
       m_Items: []
   m_Metadata:
