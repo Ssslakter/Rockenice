@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 4892470166406910898}
   - component: {fileID: 1926061744205461494}
   m_Layer: 0
-  m_Name: NewBow
+  m_Name: 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

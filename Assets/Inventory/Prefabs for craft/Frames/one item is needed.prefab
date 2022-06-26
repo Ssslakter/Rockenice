@@ -538,8 +538,6 @@ MonoBehaviour:
   itemsNeeded:
   - itemID: 0
     amountNeeded: 0
-  - itemID: 0
-    amountNeeded: 0
   inv: {fileID: 0}
   craftedItem: {fileID: 0}
   craftedItemAmount: 0
