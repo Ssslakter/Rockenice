@@ -191,8 +191,9 @@ GameObject:
   - component: {fileID: 3105697395187669597}
   - component: {fileID: 2699291597148731468}
   - component: {fileID: -3124172472112253715}
+  - component: {fileID: 2551438096048122746}
   m_Layer: 0
-  m_Name: RopeArrow
+  m_Name: 21
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -246,3 +247,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!114 &2551438096048122746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6876474554816106112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 018500ea6c768b44699691d525cabfaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipmentType: 
+  equipmentIndex: 0
+  itemSprite: {fileID: 21300000, guid: 5baa4199f9827884bbf065f51a7397a4, type: 3}
+  amountInStack: 1
+  maxStackSize: 10
+  itemID: 21

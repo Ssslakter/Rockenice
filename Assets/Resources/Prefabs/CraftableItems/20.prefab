@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 4066769287185174947}
   - component: {fileID: 6807801851576586760}
   - component: {fileID: 6873644178467090432}
+  - component: {fileID: 2639383893035285419}
   m_Layer: 0
-  m_Name: New Arrow
+  m_Name: 20
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,6 +66,24 @@ MonoBehaviour:
   lifeTimeAfterHit: 1
   spark: {fileID: 4983493872086789918, guid: 0fd55a97e19c3ee4b8171e0c02db57bb, type: 3}
   trail: {fileID: 6141854469830386573, guid: f3e68c36ec0e7a143ac46f56c0e06780, type: 3}
+--- !u!114 &2639383893035285419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7763803871242189294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 018500ea6c768b44699691d525cabfaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipmentType: 
+  equipmentIndex: 0
+  itemSprite: {fileID: 21300000, guid: 6aa31e96934939c49993a62b641bfaee, type: 3}
+  amountInStack: 1
+  maxStackSize: 10
+  itemID: 20
 --- !u!1001 &1502397874071603575
 PrefabInstance:
   m_ObjectHideFlags: 0

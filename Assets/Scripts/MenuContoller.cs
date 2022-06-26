@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
+using TMPro;
 
 public class MenuContoller : MonoBehaviour
 {
@@ -11,11 +12,14 @@ public class MenuContoller : MonoBehaviour
     public GameObject[] screenTypes = new GameObject[3];
     protected SaveData saveData;
     public bool isFinite = true;
+    public TMP_Dropdown dropdown;
+    public Button loadButton;
 
     private void Awake()
     {
         LocalizationSettings.InitializationOperation.WaitForCompletion();
         saveData = SaveDataManager.LoadJsonData();
+        loadButton.interactable = saveData.isSavedExists;
         volumeSlider.value = saveData.volume;
         AudioListener.volume = saveData.volume;
         ChangeFullscreen(saveData.fullScreenMode);
@@ -64,7 +68,7 @@ public class MenuContoller : MonoBehaviour
         saveData.fullScreenMode = type;
     }
 
-    public void ChangeLanguage()
+    public virtual void ChangeLanguage()
     {
         int nextLanguage = (saveData.currentLanguage + 1) % LocalizationSettings.AvailableLocales.Locales.Count;
         LocaleIdentifier localeCode = LocalizationSettings.AvailableLocales.Locales[nextLanguage].Identifier;
@@ -79,6 +83,37 @@ public class MenuContoller : MonoBehaviour
             }
         }
     }
+
+    public void ChangeResOnDrop()
+    {
+        saveData.resolution = dropdown.value;
+        ChangeResolution(saveData.resolution);
+    }
+
+    private void ChangeResolution(int type)
+    {
+        if (type == 0)
+        {
+            Screen.SetResolution(1920, 1080, saveData.fullScreenMode != 0);
+        }
+        else if (type == 1)
+        {
+            Screen.SetResolution(1080, 720, saveData.fullScreenMode != 0);
+        }
+        else if (type == 2)
+        {
+            Screen.SetResolution(854, 480, saveData.fullScreenMode != 0);
+        }
+    }
+
+    public void ResetProgress()
+    {
+        saveData.playerPosition = SaveData.Default.playerPosition;
+        saveData.maxScore = SaveData.Default.maxScore;
+        saveData.hp = SaveData.Default.hp;
+        loadButton.interactable = false;
+    }
+
 
     public void ChangeWorldMode()
     {

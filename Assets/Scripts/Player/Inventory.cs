@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
+using TMPro;
 
 public class Inventory : MonoBehaviour
 {
@@ -23,32 +24,19 @@ public class Inventory : MonoBehaviour
         {
             i.CustomStart();
         }
-        foreach (Slot i in equipSlots)
-        {
-            i.CustomStart();
-        }
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab) && !InGameMenuController.gameIsPaused)
         {
             if (inventoryObject.activeSelf == false)
             {
-                inventoryObject.SetActive(true);
-                aimPoint.SetActive(false);
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                gameObject.GetComponent<RigidbodyFirstPersonController>().enabled = false;
-                craftPanel.GetComponent<CheckItemsForCreation>().UpdateItems();
+                InventoryOpens();
             }
             else
             {
-                inventoryObject.SetActive(false);
-                aimPoint.SetActive(true);
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                gameObject.GetComponent<RigidbodyFirstPersonController>().enabled = true;
+                InventoryCloses();
             }
         }
         if (Input.GetKeyDown(KeyCode.E))
@@ -61,14 +49,34 @@ public class Inventory : MonoBehaviour
                 {
                     AddItem(hit.collider.gameObject.GetComponent<Item>());
                     hit.collider.gameObject.GetComponent<Outline>().OnMouseExit();
+                }
             }
-        }
         }
 
         foreach (Slot i in slots)
         {
             i.CheckForItem();
         }
+    }
+
+    public void InventoryOpens()
+    {
+        inventoryObject.SetActive(true);
+        aimPoint.SetActive(false);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        gameObject.GetComponent<RigidbodyFirstPersonController>().enabled = false;
+        craftPanel.GetComponent<CheckItemsForCreation>().UpdateItems();
+    }
+
+    public void InventoryCloses()
+    {
+        inventoryObject.SetActive(false);
+        aimPoint.SetActive(true);
+        aimPoint.transform.Find("SignForItems").GetComponent<TMP_Text>().text = "";
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        gameObject.GetComponent<RigidbodyFirstPersonController>().enabled = true;
     }
 
     public int GetItemAmount(int id)
@@ -175,4 +183,42 @@ public class Inventory : MonoBehaviour
             itemToBeAdded.gameObject.SetActive(false);
         }
     }
+
+
+
+
+    public void FormatInventory()
+    {
+        foreach (int id in Global.itemIds.Keys)
+        {
+            RemoveItemAmount(id, GetItemAmount(id));
+        }
+    }
+
+    public List<Item> SliceOfInventory()
+    {
+        List<Item> list = new List<Item>();
+
+        foreach (Slot i in slots)
+        {
+            if (i.transform.childCount > 2)
+            {
+                list.Add(i.transform.GetChild(2).GetComponent<Item>());
+            }
+        }
+
+        return list;
+    }
+
+    public void FillInventory(List<Item> items)
+    {
+        foreach(Item loadedItem in items)
+        {
+            AddItem(loadedItem);
+        }
+    }
+
+
+
+
 }

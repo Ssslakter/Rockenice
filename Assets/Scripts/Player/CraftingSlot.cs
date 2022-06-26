@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class CraftingSlot : MonoBehaviour
 {
+    public int id;
     public RequiredItem[] itemsNeeded;
 
     public Inventory inv;
 
     public GameObject craftedItem;
+
     public int craftedItemAmount;
 
+    private void Start()
+    {
+        craftedItem = Global.idToCraftableItem[id];
+    }
     public void CraftItem()
     {
         foreach(RequiredItem i in itemsNeeded)
@@ -26,7 +32,7 @@ public class CraftingSlot : MonoBehaviour
         foreach (Slot i in inv.slots)
         {
             i.CheckForItem();
-        }
+        }        
 
         Item z = Instantiate(craftedItem, Vector3.zero, Quaternion.identity).GetComponent<Item>();
         z.amountInStack = craftedItemAmount;

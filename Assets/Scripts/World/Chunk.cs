@@ -109,6 +109,7 @@ public class ChunkMesh : MonoBehaviour
                 GameObject obj = Instantiate(item);
                 Item itemScript = obj.AddComponent<Item>();
                 itemScript.itemID = Global.nameToId[item.name];
+                itemScript.itemSprite = Global.idToSprite[itemScript.itemID];
                 Outline outline = obj.AddComponent<Outline>();
                 outline.OutlineMode = Outline.Mode.OutlineVisible;
                 SpawnObjectRandomly(obj, 0.05f);

@@ -68,16 +68,16 @@ public class HotbarSlots : MonoBehaviour
     {
         UnEquipAll();
         panel.transform.position = slot[number].transform.position;
-        if (slot[number].transform.childCount > 1)
+        if (slot[number].transform.childCount > 2)
         {
-            Item item = slot[number].transform.GetChild(1).GetComponent<Item>();
+            Item item = slot[number].transform.GetChild(2).GetComponent<Item>();
 
             if (item.equipmentType == "Bow")
             {
                 items[item.equipmentIndex].SetActive(!items[item.equipmentIndex].activeInHierarchy);
                 arrowType.SetActive(true);
             }
-            if (item.equipmentType == "Orange")
+            if (item.equipmentType == "Food")
             {
                 items[item.equipmentIndex].SetActive(!items[item.equipmentIndex].activeInHierarchy);
             }

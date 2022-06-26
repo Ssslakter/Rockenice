@@ -13,6 +13,13 @@ public class Global : MonoBehaviour
     static public LocalizedString str;
     public Transform signParent;
 
+    public Texture2D[] textures;
+    public GameObject[] craftableItems;
+
+    static public Dictionary<int, Sprite> idToSprite = new Dictionary<int, Sprite>();
+
+    static public Dictionary<int, GameObject> idToCraftableItem = new Dictionary<int, GameObject>();
+
     static public Dictionary<string, int> nameToId = new Dictionary<string, int> {
         {"Rock_01" , 0},
         {"Rock_02" , 0},
@@ -21,13 +28,12 @@ public class Global : MonoBehaviour
         {"Rock_05" , 0},
         {"Branch_01" , 1},
         {"Mushroom_01" , 2},
-        {"Mushroom_02" , 2},
+        {"Mushroom_02" , 11},
         {"Bonfire_01" , 4},
         {"SM_Scrap_Metal_02" , 5},
         {"SM_Scrap_Metal_03" , 5},
         {"SM_Woods_02" , 6}
     };
-
 
     static public Dictionary<int, LocalizedString> itemIds = new Dictionary<int, LocalizedString> {
         { 0, new LocalizedString("UI text","Stone") },
@@ -37,8 +43,11 @@ public class Global : MonoBehaviour
         { 4,new LocalizedString("UI text","Campfire") },
         { 5,new LocalizedString("UI text","Scrap") },
         { 6,new LocalizedString("UI text","Planks") },
-        { 10,new LocalizedString("UI text","Orange") }
+        { 10,new LocalizedString("UI text","Orange") },
+        { 11, new LocalizedString("UI text", "Red mushroom")},
+
     };
+
     static public Dictionary<int, FullScreenMode> screenModes = new Dictionary<int, FullScreenMode>
     {
 
@@ -53,5 +62,21 @@ public class Global : MonoBehaviour
         signForItems = signParent.Find("SignForItems").gameObject;
         prefabs = Resources.LoadAll<GameObject>("NeedToSpawn/Default");
         prefabsInteractable = Resources.LoadAll<GameObject>("NeedToSpawn/WithOutline");
+        textures = Resources.LoadAll<Texture2D>("Sprites");
+        craftableItems = Resources.LoadAll<GameObject>("Prefabs/CraftableItems");
+       
+
+        foreach(Texture2D texture in textures)
+        {
+            Sprite mySprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
+            idToSprite.Add(int.Parse(texture.name), mySprite);
+        }
+
+        foreach(GameObject item in craftableItems)
+        {
+            idToCraftableItem.Add(int.Parse(item.name), item);
+        }
+
+
     }
 }
