@@ -120,6 +120,30 @@ MonoBehaviour:
     m_Localized: Red mushroom
     m_Metadata:
       m_Items: []
+  - m_Id: 685695834324992
+    m_Localized: World Mode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 685785927974912
+    m_Localized: Infinite
+    m_Metadata:
+      m_Items: []
+  - m_Id: 685973191065600
+    m_Localized: Finite
+    m_Metadata:
+      m_Items: []
+  - m_Id: 686413563625472
+    m_Localized: Save
+    m_Metadata:
+      m_Items: []
+  - m_Id: 686521638256640
+    m_Localized: Save
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1138315258560512
+    m_Localized: Resolution
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

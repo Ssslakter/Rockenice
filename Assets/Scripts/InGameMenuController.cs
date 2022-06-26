@@ -2,12 +2,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
+
 public class InGameMenuController : MenuContoller
 {
     public static bool gameIsPaused;
     public GameObject settingMenu;
     public GameObject crosshair;
     public Inventory inventory;
+
 
     public void Unpause()
     {
@@ -24,12 +26,15 @@ public class InGameMenuController : MenuContoller
     }
     private void Start()
     {
+        Global.player.transform.position = saveData.playerPosition;
+        ScoreController.score = saveData.maxScore;
+        HealthBar.hp = saveData.hp;
         gameIsPaused = false;
         PauseGame();
     }
     public void StopPlaying()
     {
-        SaveDataManager.SaveJsonData(saveData);
+        SaveProgress();
         SceneManager.LoadScene(sceneWhereToGo);
     }
     void PauseGame()
@@ -56,6 +61,13 @@ public class InGameMenuController : MenuContoller
             crosshair.transform.GetChild(0).GetComponent<TMP_Text>().text = "";
         }
 
+    }
+
+    public void SaveProgress()
+    {
+        saveData.playerPosition = Global.player.transform.position;
+        saveData.maxScore = ScoreController.score;
+        SaveDataManager.SaveJsonData(saveData);
     }
 
     public override void ChangeLanguage()

@@ -12,7 +12,7 @@ public class Slot : MonoBehaviour
 
     public void CustomStart()
     {
-        defaultSprite = transform.GetChild(1).GetComponent<Image>().sprite;   
+        defaultSprite = transform.GetChild(1).GetComponent<Image>().sprite;
         amountText = transform.GetChild(0).GetComponent<Text>();
         amountText.text = "";
     }
@@ -29,11 +29,11 @@ public class Slot : MonoBehaviour
 
     public void CheckForItem()
     {
-        if(transform.childCount > 2)
+        if (transform.childCount > 2)
         {
             slotsItem = transform.GetChild(2).GetComponent<Item>();
             transform.GetChild(1).GetComponent<Image>().sprite = slotsItem.itemSprite;
-                
+
             if (slotsItem.amountInStack >= 1)
                 amountText.text = slotsItem.amountInStack.ToString();
         }

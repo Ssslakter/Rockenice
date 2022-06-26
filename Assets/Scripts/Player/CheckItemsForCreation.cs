@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class CheckItemsForCreation : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -9,21 +10,11 @@ public class CheckItemsForCreation : MonoBehaviour
     public GameObject[] items;
     public GameObject craftPanel;
 
+    private List<GameObject> openedItems = new List<GameObject>();
+    private List<GameObject> children = new List<GameObject>();
+
     public void UpdateItems()
     {
-
-        List<GameObject> allChildren = new List<GameObject>();
-
-        foreach (Transform child in craftPanel.transform)
-        {
-            allChildren.Add(child.gameObject);
-        }
-
-        foreach (GameObject child in allChildren)
-        {
-            DestroyImmediate(child.gameObject, true);
-        }
-
         foreach (GameObject craftItem in items)
         {
             bool canCraft = true;
@@ -32,16 +23,21 @@ public class CheckItemsForCreation : MonoBehaviour
                 if (inventory.GetItemAmount(i.itemID) == 0)
                 {
                     canCraft = false;
-                    return;
+                    break;
                 }
             }
 
             if (canCraft)
             {
-                var item = Instantiate(craftItem);
-                item.transform.SetParent(craftPanel.transform);
-                item.GetComponentInChildren<CraftingSlot>().inv = inventory;
+                if (!openedItems.Contains(craftItem))
+                {
+                    var item = Instantiate(craftItem);
+                    item.transform.SetParent(craftPanel.transform);
+                    item.GetComponentInChildren<CraftingSlot>().inv = inventory;
+                    openedItems.Add(craftItem);
+                }
             }
+
         }
     }
 }

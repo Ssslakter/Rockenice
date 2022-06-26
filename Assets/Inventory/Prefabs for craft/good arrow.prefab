@@ -481,7 +481,6 @@ GameObject:
   - component: {fileID: 2509476099145532222}
   - component: {fileID: 2509476099145532223}
   - component: {fileID: 2509476099145532220}
-  - component: {fileID: 646126460005401507}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -574,7 +573,7 @@ MonoBehaviour:
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
+    m_FadeDuration: 0
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -615,6 +614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0650ec83a87a7cf4ea7f892b88f06b4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 20
   itemsNeeded:
   - itemID: 1
     amountNeeded: 1
@@ -622,22 +622,7 @@ MonoBehaviour:
     amountNeeded: 1
   inv: {fileID: 0}
   craftedItem: {fileID: 0}
-  craftedItemAmount: 0
---- !u!114 &646126460005401507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2509476099145532210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 0.1, y: 0.1}
-  m_UseGraphicAlpha: 1
+  craftedItemAmount: 5
 --- !u!1 &3083030985841374533
 GameObject:
   m_ObjectHideFlags: 0
@@ -784,7 +769,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0ed4d4f5e852b4b469b92416804e0931, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 02f960824b8e49b4a94ed49693d44fa6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

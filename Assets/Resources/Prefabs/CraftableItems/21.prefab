@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: -3124172472112253715}
   - component: {fileID: 2551438096048122746}
   m_Layer: 0
-  m_Name: RopeArrow
+  m_Name: 21
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

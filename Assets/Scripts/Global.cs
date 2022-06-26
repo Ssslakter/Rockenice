@@ -14,8 +14,11 @@ public class Global : MonoBehaviour
     public Transform signParent;
 
     public Texture2D[] textures;
+    public GameObject[] craftableItems;
 
     static public Dictionary<int, Sprite> idToSprite = new Dictionary<int, Sprite>();
+
+    static public Dictionary<int, GameObject> idToCraftableItem = new Dictionary<int, GameObject>();
 
     static public Dictionary<string, int> nameToId = new Dictionary<string, int> {
         {"Rock_01" , 0},
@@ -42,6 +45,7 @@ public class Global : MonoBehaviour
         { 6,new LocalizedString("UI text","Planks") },
         { 10,new LocalizedString("UI text","Orange") },
         { 11, new LocalizedString("UI text", "Red mushroom")},
+
     };
 
     static public Dictionary<int, FullScreenMode> screenModes = new Dictionary<int, FullScreenMode>
@@ -59,12 +63,20 @@ public class Global : MonoBehaviour
         prefabs = Resources.LoadAll<GameObject>("NeedToSpawn/Default");
         prefabsInteractable = Resources.LoadAll<GameObject>("NeedToSpawn/WithOutline");
         textures = Resources.LoadAll<Texture2D>("Sprites");
+        craftableItems = Resources.LoadAll<GameObject>("Prefabs/CraftableItems");
        
 
         foreach(Texture2D texture in textures)
         {
             Sprite mySprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
             idToSprite.Add(int.Parse(texture.name), mySprite);
-        }   
+        }
+
+        foreach(GameObject item in craftableItems)
+        {
+            idToCraftableItem.Add(int.Parse(item.name), item);
+        }
+
+
     }
 }

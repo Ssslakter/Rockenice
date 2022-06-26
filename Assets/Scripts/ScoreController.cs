@@ -6,13 +6,12 @@ using UnityEngine.Localization;
 using UnityEngine.Localization.Components;
 
 public class ScoreController : MonoBehaviour
-{   
+{
     public static string score;
     public LocalizeStringEvent localizeStringEvent;
 
     private void Start()
     {
-        score = Mathf.Ceil(Global.player.transform.position.y).ToString();
         localizeStringEvent = gameObject.GetComponent<LocalizeStringEvent>();
     }
     private void Update()
@@ -21,5 +20,4 @@ public class ScoreController : MonoBehaviour
         localizeStringEvent.RefreshString();
     }
 
-    
 }
