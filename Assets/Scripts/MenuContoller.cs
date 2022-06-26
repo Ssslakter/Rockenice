@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
+using TMPro;
 
 public class MenuContoller : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class MenuContoller : MonoBehaviour
     public GameObject[] screenTypes = new GameObject[3];
     protected SaveData saveData;
     public bool isFinite = true;
+    public TMP_Dropdown dropdown;
 
     private void Awake()
     {
@@ -79,6 +81,29 @@ public class MenuContoller : MonoBehaviour
             }
         }
     }
+
+    public void ChangeResOnDrop()
+    {
+        saveData.resolution = dropdown.value;
+        ChangeResolution(saveData.resolution);
+    }
+
+    private void ChangeResolution(int type)
+    {
+        if (type == 0)
+        {
+            Screen.SetResolution(1920, 1080, saveData.fullScreenMode != 0);
+        }
+        else if (type == 1)
+        {
+            Screen.SetResolution(1080, 720, saveData.fullScreenMode != 0);
+        }
+        else if (type == 2)
+        {
+            Screen.SetResolution(854, 480, saveData.fullScreenMode != 0);
+        }
+    }
+
 
     public void ChangeWorldMode()
     {

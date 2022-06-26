@@ -11,6 +11,7 @@ public class SaveData
     public string maxScore;
     public float hp;
     public bool isFiniteWorld;
+    public int resolution;
 
     public string ToJson()
     {
@@ -32,6 +33,7 @@ public class SaveData
         instance.currentLanguage = 0;
         instance.hp = 1;
         instance.isFiniteWorld = true;
+        instance.resolution = 0;
         return instance;
     }
 }

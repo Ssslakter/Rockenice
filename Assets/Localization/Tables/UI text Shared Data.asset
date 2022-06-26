@@ -135,6 +135,10 @@ MonoBehaviour:
     m_Key: Sav
     m_Metadata:
       m_Items: []
+  - m_Id: 1138315258560512
+    m_Key: Resolution
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
