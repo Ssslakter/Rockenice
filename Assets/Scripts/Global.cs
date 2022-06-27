@@ -12,6 +12,7 @@ public class Global : MonoBehaviour
     static public GameObject signForItems;
     static public LocalizedString str;
     public Transform signParent;
+    static public bool flag = true;
 
     public Texture2D[] textures;
     public GameObject[] craftableItems;
@@ -70,28 +71,32 @@ public class Global : MonoBehaviour
 
     public void Awake()
     {
+
         player = GameObject.Find("RigidBodyFPSController");
         signForItems = signParent.Find("SignForItems").gameObject;
         prefabs = Resources.LoadAll<GameObject>("NeedToSpawn/Default");
         prefabsInteractable = Resources.LoadAll<GameObject>("NeedToSpawn/WithOutline");
         textures = Resources.LoadAll<Texture2D>("Sprites");
         craftableItems = Resources.LoadAll<GameObject>("Prefabs/CraftableItems");
-        
+
+
 
 
         if (flagForSprites)
         {
-            foreach(Texture2D texture in textures)
+            foreach (Texture2D texture in textures)
             {
                 Sprite mySprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
                 idToSprite.Add(int.Parse(texture.name), mySprite);
             }
 
-            foreach(GameObject item in craftableItems)
+            foreach (GameObject item in craftableItems)
             {
                 idToCraftableItem.Add(int.Parse(item.name), item);
             }
+
             flagForSprites = false;
+            
         }
     }
 }

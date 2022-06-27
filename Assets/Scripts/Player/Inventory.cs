@@ -27,7 +27,7 @@ public class Inventory : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab) && !InGameMenuController.gameIsPaused)
+        if (Input.GetKeyDown(KeyCode.Tab) && !InGameMenuController.gameIsPaused && !HealthBar.dead)
         {
             if (inventoryObject.activeSelf == false)
             {
@@ -182,47 +182,5 @@ public class Inventory : MonoBehaviour
             itemToBeAdded.gameObject.SetActive(false);
         }
     }
-
-
-
-
-    public class itemCopy
-    {
-        
-    }
-
-    public List<GameObject> SliceOfInventory()
-    {
-        List<GameObject> list = new List<GameObject>();
-
-        foreach (Slot i in slots)
-        {
-            if (i.transform.childCount > 2)
-            {
-                GameObject copy = Instantiate(i.gameObject);
-                list.Add(copy);
-            }
-        }
-        print("Save Inv");
-        print(list[0]);
-        return list;
-    }
-
-    public void FillInventory(List<GameObject> items)
-    {
-        print("fill");
-        print(items.Count);
-
-        foreach(GameObject loadedItem in items)
-        {
-            if (loadedItem != null)
-            {
-                print("Загружено");
-                AddItem(loadedItem.GetComponent<Slot>().slotsItem);
-            }
-
-        }
-    }
-
 
 }

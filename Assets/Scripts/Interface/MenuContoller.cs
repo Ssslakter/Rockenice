@@ -13,11 +13,14 @@ public class MenuContoller : MonoBehaviour
     protected SaveData saveData;
     public bool isFinite = true;
     public TMP_Dropdown dropdown;
+    public Button loadButton;
 
     private void Awake()
     {
+        isFinite = true;
         LocalizationSettings.InitializationOperation.WaitForCompletion();
         saveData = SaveDataManager.LoadJsonData();
+        loadButton.interactable = saveData.isSavedExists;
         volumeSlider.value = saveData.volume;
         AudioListener.volume = saveData.volume;
         ChangeFullscreen(saveData.fullScreenMode);
@@ -26,7 +29,6 @@ public class MenuContoller : MonoBehaviour
 
     public void NewGame()
     {
-        saveData.inventory = SaveData.Default.inventory;
         saveData.playerPosition = SaveData.Default.playerPosition;
         saveData.maxScore = SaveData.Default.maxScore;
         saveData.hp = SaveData.Default.hp;
@@ -103,6 +105,15 @@ public class MenuContoller : MonoBehaviour
         {
             Screen.SetResolution(854, 480, saveData.fullScreenMode != 0);
         }
+    }
+
+    public void ResetProgress()
+    {
+        saveData.playerPosition = SaveData.Default.playerPosition;
+        saveData.maxScore = SaveData.Default.maxScore;
+        saveData.hp = SaveData.Default.hp;
+        loadButton.interactable = false;
+        saveData.isSavedExists = false;
     }
 
 

@@ -8,11 +8,11 @@ public class SaveData
     public int fullScreenMode;
     public int currentLanguage;
     public Vector3 playerPosition;
-    public string maxScore;
+    public string maxScore = "0";
     public float hp;
     public bool isFiniteWorld;
     public int resolution;
-    public List<GameObject> inventory;
+    public bool isSavedExists = false;
 
     public string ToJson()
     {
@@ -35,7 +35,7 @@ public class SaveData
         instance.hp = 1;
         instance.isFiniteWorld = true;
         instance.resolution = 0;
-        instance.inventory = new List<GameObject>();
+        instance.isSavedExists = false;
         return instance;
     }
 }

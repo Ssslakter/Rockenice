@@ -140,6 +140,8 @@ MonoBehaviour:
     m_Localized: Resolution
     m_Metadata:
       m_Items: []
+  - m_Id: 1171726136311808
+    m_Localized: Reset progress
   - m_Id: 1604336178483200
     m_Localized: You died
     m_Metadata:

@@ -14,13 +14,17 @@ public class HealthBar : MonoBehaviour
     public AudioClip hurtSound;
     public static float hp;
 
+    public static bool dead = false;
+
+    public GameObject killMePleaseObj;
+
     private bool firstFrame = true;
     private float fallDistance;
     private float lastPositionY;
     private void Start()
     {
-        deadText.SetActive(false);
         lastPositionY = player.transform.position.y;
+        deadText.SetActive(false);
     }
 
     private void Update()
@@ -28,6 +32,7 @@ public class HealthBar : MonoBehaviour
         if (firstFrame)
         {
             Healthbar.fillAmount = hp;
+            text.text = Mathf.CeilToInt(Healthbar.fillAmount * 100).ToString();
             firstFrame = false;
         }
     }
@@ -57,6 +62,7 @@ public class HealthBar : MonoBehaviour
         {
             text.gameObject.SetActive(false);
             deadText.SetActive(true);
+            OpenDeathScreen();
         }
     }
 
@@ -82,5 +88,14 @@ public class HealthBar : MonoBehaviour
             }
             fallDistance = 0;
         }
+    }
+
+    void OpenDeathScreen()
+    {
+        dead = true;
+        killMePleaseObj.SetActive(true);
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }
