@@ -19,6 +19,7 @@ public class HealthBar : MonoBehaviour
     private float lastPositionY;
     private void Start()
     {
+        lastPositionY = player.transform.position.y;
         deadText.SetActive(false);
     }
 
@@ -27,6 +28,7 @@ public class HealthBar : MonoBehaviour
         if (firstFrame)
         {
             Healthbar.fillAmount = hp;
+            text.text = Mathf.CeilToInt(Healthbar.fillAmount * 100).ToString();
             firstFrame = false;
         }
     }

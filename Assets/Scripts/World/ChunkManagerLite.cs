@@ -86,7 +86,7 @@ public class ChunkManagerLite : MonoBehaviour
                 chunkDictionary.Add(worldPos, new Chunk(worldPos, transform, checkpointPeriod, chunkParams));
             }
         }
-        SpawnBorders(new Vector3(numberOfVisibleChunks * chunkParams.chunkLength, 0, 0));
+        SpawnBorders(new Vector3((numberOfVisibleChunks - 1) * chunkParams.chunkLength, 0, 0));
     }
 
     [System.Serializable]

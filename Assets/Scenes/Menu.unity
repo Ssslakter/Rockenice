@@ -3574,6 +3574,7 @@ MonoBehaviour:
   - {fileID: 606559174}
   isFinite: 1
   dropdown: {fileID: 1802749694}
+  loadButton: {fileID: 2075389545}
 --- !u!1 &1482427265
 GameObject:
   m_ObjectHideFlags: 0
@@ -4198,13 +4199,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1480311223}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 1480311225}
+        m_TargetAssemblyTypeName: MenuContoller, Assembly-CSharp
+        m_MethodName: ResetProgress
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

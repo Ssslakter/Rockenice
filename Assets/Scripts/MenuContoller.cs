@@ -17,6 +17,7 @@ public class MenuContoller : MonoBehaviour
 
     private void Awake()
     {
+        isFinite = true;
         LocalizationSettings.InitializationOperation.WaitForCompletion();
         saveData = SaveDataManager.LoadJsonData();
         loadButton.interactable = saveData.isSavedExists;
@@ -40,7 +41,7 @@ public class MenuContoller : MonoBehaviour
         SaveDataManager.SaveJsonData(saveData);
         if (saveData.isFiniteWorld != isFinite)
         {
-            saveData = SaveData.Default;
+            ChangeWorldMode();
         }
         SceneManager.LoadScene(sceneWhereToGo);
     }
@@ -112,6 +113,7 @@ public class MenuContoller : MonoBehaviour
         saveData.maxScore = SaveData.Default.maxScore;
         saveData.hp = SaveData.Default.hp;
         loadButton.interactable = false;
+        saveData.isSavedExists = false;
     }
 
 
