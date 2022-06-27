@@ -119,7 +119,6 @@ public class MenuContoller : MonoBehaviour
 
     public void ChangeWorldMode()
     {
-        isFinite = !isFinite;
         if (isFinite)
         {
             isFinite = false;
