@@ -122,8 +122,8 @@ Transform:
   m_GameObject: {fileID: 686691937500488737}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: -1512316738315180758}
   - {fileID: 5489632634607985794}
@@ -151,6 +151,7 @@ MonoBehaviour:
   arrow: {fileID: 2482296214266971428, guid: 89c5758ba2ca8c64d84d060bacb43a95, type: 3}
   bowString: {fileID: -3534619648993796756}
   stringRoot: {fileID: 6078406316972653947}
+  inventory: {fileID: 0}
 --- !u!114 &1926061744205461494
 MonoBehaviour:
   m_ObjectHideFlags: 0

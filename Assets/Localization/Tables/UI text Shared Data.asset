@@ -36,7 +36,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2562088566784
-    m_Key: Language
+    m_Key: Deat
     m_Metadata:
       m_Items: []
   - m_Id: 2595663970304
@@ -133,6 +133,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 1138315258560512
     m_Key: Resolution
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1604336178483200
+    m_Key: Death
     m_Metadata:
       m_Items: []
   m_Metadata:

@@ -26,6 +26,7 @@ public class MenuContoller : MonoBehaviour
 
     public void NewGame()
     {
+        saveData.inventory = SaveData.Default.inventory;
         saveData.playerPosition = SaveData.Default.playerPosition;
         saveData.maxScore = SaveData.Default.maxScore;
         saveData.hp = SaveData.Default.hp;
@@ -38,7 +39,7 @@ public class MenuContoller : MonoBehaviour
         SaveDataManager.SaveJsonData(saveData);
         if (saveData.isFiniteWorld != isFinite)
         {
-            saveData = SaveData.Default;
+            ChangeWorldMode();
         }
         SceneManager.LoadScene(sceneWhereToGo);
     }
@@ -107,7 +108,6 @@ public class MenuContoller : MonoBehaviour
 
     public void ChangeWorldMode()
     {
-        isFinite = !isFinite;
         if (isFinite)
         {
             isFinite = false;

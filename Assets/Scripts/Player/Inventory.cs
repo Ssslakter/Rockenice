@@ -186,38 +186,43 @@ public class Inventory : MonoBehaviour
 
 
 
-    public void FormatInventory()
+    public class itemCopy
     {
-        foreach (int id in Global.itemIds.Keys)
-        {
-            RemoveItemAmount(id, GetItemAmount(id));
-        }
+        
     }
 
-    public List<Item> SliceOfInventory()
+    public List<GameObject> SliceOfInventory()
     {
-        List<Item> list = new List<Item>();
+        List<GameObject> list = new List<GameObject>();
 
         foreach (Slot i in slots)
         {
             if (i.transform.childCount > 2)
             {
-                list.Add(i.transform.GetChild(2).GetComponent<Item>());
+                GameObject copy = Instantiate(i.gameObject);
+                list.Add(copy);
             }
         }
-
+        print("Save Inv");
+        print(list[0]);
         return list;
     }
 
-    public void FillInventory(List<Item> items)
+    public void FillInventory(List<GameObject> items)
     {
-        foreach(Item loadedItem in items)
+        print("fill");
+        print(items.Count);
+
+        foreach(GameObject loadedItem in items)
         {
-            AddItem(loadedItem);
+            if (loadedItem != null)
+            {
+                print("Загружено");
+                AddItem(loadedItem.GetComponent<Slot>().slotsItem);
+            }
+
         }
     }
-
-
 
 
 }

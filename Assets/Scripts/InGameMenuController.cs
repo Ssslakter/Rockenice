@@ -29,6 +29,7 @@ public class InGameMenuController : MenuContoller
         Global.player.transform.position = saveData.playerPosition;
         ScoreController.score = saveData.maxScore;
         HealthBar.hp = saveData.hp;
+        Global.player.GetComponent<Inventory>().FillInventory(saveData.inventory);
         gameIsPaused = false;
         PauseGame();
     }
@@ -65,6 +66,10 @@ public class InGameMenuController : MenuContoller
 
     public void SaveProgress()
     {
+        saveData.hp = HealthBar.hp;
+        saveData.inventory = Global.player.GetComponent<Inventory>().SliceOfInventory();
+        print("!!!");
+        print(saveData.inventory[0]);
         saveData.playerPosition = Global.player.transform.position;
         saveData.maxScore = ScoreController.score;
         SaveDataManager.SaveJsonData(saveData);

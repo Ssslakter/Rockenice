@@ -16,6 +16,8 @@ public class Global : MonoBehaviour
     public Texture2D[] textures;
     public GameObject[] craftableItems;
 
+    private static bool flagForSprites = true;
+
     static public Dictionary<int, Sprite> idToSprite = new Dictionary<int, Sprite>();
 
     static public Dictionary<int, GameObject> idToCraftableItem = new Dictionary<int, GameObject>();
@@ -76,17 +78,20 @@ public class Global : MonoBehaviour
         craftableItems = Resources.LoadAll<GameObject>("Prefabs/CraftableItems");
         
 
-        foreach(Texture2D texture in textures)
+
+        if (flagForSprites)
         {
-            Sprite mySprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
-            idToSprite.Add(int.Parse(texture.name), mySprite);
+            foreach(Texture2D texture in textures)
+            {
+                Sprite mySprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
+                idToSprite.Add(int.Parse(texture.name), mySprite);
+            }
+
+            foreach(GameObject item in craftableItems)
+            {
+                idToCraftableItem.Add(int.Parse(item.name), item);
+            }
+            flagForSprites = false;
         }
-
-        foreach(GameObject item in craftableItems)
-        {
-            idToCraftableItem.Add(int.Parse(item.name), item);
-        }
-
-
     }
 }
