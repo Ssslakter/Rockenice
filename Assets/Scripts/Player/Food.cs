@@ -7,9 +7,9 @@ public class Food : MonoBehaviour
     public float nutritionalValue;
     private int idFood;
     public KeyCode keyForEat;
-    public Inventory inventory;
+    //public Inventory inventory;
     public HealthBar health;
-    public UnityStandardAssets.Characters.FirstPerson.RigidbodyFirstPersonController player;
+    //public UnityStandardAssets.Characters.FirstPerson.RigidbodyFirstPersonController player;
 
     private void Start()
     {
@@ -21,14 +21,12 @@ public class Food : MonoBehaviour
     {
         if (Input.GetKeyDown(keyForEat))
         {
-            inventory.RemoveItemAmount(idFood, 1);
+            Global.player.GetComponent<Inventory>().RemoveItemAmount(idFood, 1);
 
             health.AddHealth(nutritionalValue);
-            player.movementSettings.AddStamina(nutritionalValue);
+            Global.player.GetComponent<UnityStandardAssets.Characters.FirstPerson.RigidbodyFirstPersonController>().movementSettings.AddStamina(nutritionalValue);
 
-            Debug.Log("Скушано");
-
-            if (inventory.GetItemAmount(idFood) == 0)
+            if (Global.player.GetComponent<Inventory>().GetItemAmount(idFood) == 0)
             {
                 gameObject.SetActive(false);
             }

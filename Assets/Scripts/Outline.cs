@@ -165,18 +165,18 @@ public class Outline : MonoBehaviour
 
             UpdateMaterialProperties();
         }
-        if (Vector3.Distance(gameObject.transform.position, Global.player.transform.position) >= 2f)
+        if (Vector3.Distance(gameObject.transform.position, Global.player.transform.position) >= 3f)
         {
             outline.enabled = false;
             Global.signForItems.GetComponent<TMP_Text>().text = "";
         }
     }
 
-    private void OnMouseOver()
+    public void OnMouseOver()
     {
         if (!mouseOnItem)
         {
-            if (Vector3.Distance(gameObject.transform.position, Global.player.transform.position) < 2f)
+            if (Vector3.Distance(gameObject.transform.position, Global.player.transform.position) < 3f)
             {
                 outline.enabled = true;
                 Global.signForItems.GetComponent<LocalizeStringEvent>().StringReference = Global.itemIds[gameObject.GetComponent<Item>().itemID];
@@ -186,7 +186,7 @@ public class Outline : MonoBehaviour
         }
         else
         {
-            if (Vector3.Distance(gameObject.transform.position, Global.player.transform.position) >= 2f)
+            if (Vector3.Distance(gameObject.transform.position, Global.player.transform.position) >= 3f)
             {
                 OnMouseExit();
             }

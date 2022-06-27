@@ -10,12 +10,11 @@ public class Inventory : MonoBehaviour
     public GameObject inventoryObject;
     public GameObject aimPoint;
     public GameObject craftPanel;
-    public float distance = 2f;
+    public float distance;
 
     public Slot[] slots;
 
-    public Slot[] equipSlots;
-
+    public HealthBar health;
     void Start()
     {
         inventoryObject.SetActive(false);

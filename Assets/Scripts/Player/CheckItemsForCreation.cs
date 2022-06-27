@@ -11,7 +11,6 @@ public class CheckItemsForCreation : MonoBehaviour
     public GameObject craftPanel;
 
     private List<GameObject> openedItems = new List<GameObject>();
-    private List<GameObject> children = new List<GameObject>();
 
     public void UpdateItems()
     {

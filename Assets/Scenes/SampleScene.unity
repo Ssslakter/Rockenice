@@ -123,6 +123,105 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &20794011
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 657947530}
+    m_Modifications:
+    - target: {fileID: 5440707293445505367, guid: 76716669f2e2c474b912d7d719112480, type: 3}
+      propertyPath: m_Name
+      value: YellowMushroom
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440707293445505367, guid: 76716669f2e2c474b912d7d719112480, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440707293445741943, guid: 76716669f2e2c474b912d7d719112480, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440707293445741943, guid: 76716669f2e2c474b912d7d719112480, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440707293445741943, guid: 76716669f2e2c474b912d7d719112480, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440707293445741943, guid: 76716669f2e2c474b912d7d719112480, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440707293445741943, guid: 76716669f2e2c474b912d7d719112480, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440707293445741943, guid: 76716669f2e2c474b912d7d719112480, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440707293445741943, guid: 76716669f2e2c474b912d7d719112480, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440707293445741943, guid: 76716669f2e2c474b912d7d719112480, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440707293445741943, guid: 76716669f2e2c474b912d7d719112480, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440707293445741943, guid: 76716669f2e2c474b912d7d719112480, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440707293445741943, guid: 76716669f2e2c474b912d7d719112480, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 76716669f2e2c474b912d7d719112480, type: 3}
+--- !u!1 &20794012 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5440707293445505367, guid: 76716669f2e2c474b912d7d719112480, type: 3}
+  m_PrefabInstance: {fileID: 20794011}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &20794013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20794012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 018500ea6c768b44699691d525cabfaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipmentType: Food
+  equipmentIndex: 2
+  itemSprite: {fileID: 21300000, guid: 3d78ab2b1c240b84cb235a780a68a680, type: 3}
+  amountInStack: 1
+  maxStackSize: 10
+  itemID: 2
+--- !u!114 &20794014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20794012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e674f7ad4c725784c943a2ce81305c81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nutritionalValue: 10
+  keyForEat: 113
+  health: {fileID: 155890045}
 --- !u!1 &67104924
 GameObject:
   m_ObjectHideFlags: 0
@@ -861,9 +960,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nutritionalValue: 40
   keyForEat: 113
-  inventory: {fileID: 1908234699}
   health: {fileID: 155890045}
-  player: {fileID: 1908234696}
 --- !u!1 &398776807
 GameObject:
   m_ObjectHideFlags: 0
@@ -16757,6 +16854,8 @@ MonoBehaviour:
   unstaticItems:
   - {fileID: 872710217}
   - {fileID: 333962265}
+  - {fileID: 20794012}
+  - {fileID: 1777278473}
   number: 0
   panel: {fileID: 662575248}
   arrowType: {fileID: 1059754267}
@@ -17699,6 +17798,105 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1711029874}
   m_CullTransparentMesh: 1
+--- !u!1001 &1777278472
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 657947530}
+    m_Modifications:
+    - target: {fileID: 4385080170327957909, guid: b5d567057f6248c43bc6fa453cb77a93, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4385080170327957909, guid: b5d567057f6248c43bc6fa453cb77a93, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4385080170327957909, guid: b5d567057f6248c43bc6fa453cb77a93, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4385080170327957909, guid: b5d567057f6248c43bc6fa453cb77a93, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 4385080170327957909, guid: b5d567057f6248c43bc6fa453cb77a93, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4385080170327957909, guid: b5d567057f6248c43bc6fa453cb77a93, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4385080170327957909, guid: b5d567057f6248c43bc6fa453cb77a93, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4385080170327957909, guid: b5d567057f6248c43bc6fa453cb77a93, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4385080170327957909, guid: b5d567057f6248c43bc6fa453cb77a93, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4385080170327957909, guid: b5d567057f6248c43bc6fa453cb77a93, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4385080170327957909, guid: b5d567057f6248c43bc6fa453cb77a93, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4385080170328260021, guid: b5d567057f6248c43bc6fa453cb77a93, type: 3}
+      propertyPath: m_Name
+      value: RedMushroom
+      objectReference: {fileID: 0}
+    - target: {fileID: 4385080170328260021, guid: b5d567057f6248c43bc6fa453cb77a93, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b5d567057f6248c43bc6fa453cb77a93, type: 3}
+--- !u!1 &1777278473 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4385080170328260021, guid: b5d567057f6248c43bc6fa453cb77a93, type: 3}
+  m_PrefabInstance: {fileID: 1777278472}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1777278474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1777278473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 018500ea6c768b44699691d525cabfaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipmentType: Food
+  equipmentIndex: 3
+  itemSprite: {fileID: 21300000, guid: 4d5fc027e779a0a43ba9c08647590cb7, type: 3}
+  amountInStack: 1
+  maxStackSize: 10
+  itemID: 11
+--- !u!114 &1777278475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1777278473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e674f7ad4c725784c943a2ce81305c81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nutritionalValue: -10
+  keyForEat: 113
+  health: {fileID: 155890045}
 --- !u!1 &1783525756
 GameObject:
   m_ObjectHideFlags: 0
@@ -18067,7 +18265,7 @@ MonoBehaviour:
   inventoryObject: {fileID: 1229141409}
   aimPoint: {fileID: 701325721}
   craftPanel: {fileID: 1636554468}
-  distance: 2
+  distance: 3
   slots:
   - {fileID: 1151690692}
   - {fileID: 1153242329}
@@ -18089,7 +18287,7 @@ MonoBehaviour:
   - {fileID: 1683291218}
   - {fileID: 609844332}
   - {fileID: 462642853}
-  equipSlots: []
+  health: {fileID: 155890045}
 --- !u!54 &1908234701 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 5400000, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 3}

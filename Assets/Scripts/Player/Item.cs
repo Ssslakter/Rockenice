@@ -5,7 +5,7 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     public string equipmentType;
-    public int equipmentIndex;
+    public int equipmentIndex; 
     [Space]
     public Sprite itemSprite;
     [Space]
@@ -14,13 +14,14 @@ public class Item : MonoBehaviour
     [Space]
     public int itemID;
 
-    public void DropItem()
+    IEnumerator Example()
     {
-        if (gameObject)
-        {
-            transform.parent = null;
-            gameObject.SetActive(true);
-            transform.position = Camera.main.transform.position + Camera.main.transform.forward;
-        }
+        yield return new WaitForSecondsRealtime(1);
+    }
+
+    private void OnCollisionEnter()
+    {
+        Example();
+        Destroy(gameObject.GetComponent<Rigidbody>());
     }
 }

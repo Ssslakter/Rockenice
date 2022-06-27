@@ -20,6 +20,7 @@ public class HealthBar : MonoBehaviour
     private void Start()
     {
         deadText.SetActive(false);
+        lastPositionY = player.transform.position.y;
     }
 
     private void Update()

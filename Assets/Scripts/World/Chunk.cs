@@ -110,6 +110,15 @@ public class ChunkMesh : MonoBehaviour
                 Item itemScript = obj.AddComponent<Item>();
                 itemScript.itemID = Global.nameToId[item.name];
                 itemScript.itemSprite = Global.idToSprite[itemScript.itemID];
+                if (Global.foodIdToNutritionalValue.ContainsKey(itemScript.itemID))
+                {
+                    Food foodData = obj.AddComponent<Food>();
+                    itemScript.equipmentType = "Food";
+                    itemScript.equipmentIndex = Global.foodIdToEquipmentIndex[itemScript.itemID];
+                    foodData.health = Global.player.GetComponent<Inventory>().health;
+                    foodData.nutritionalValue = Global.foodIdToNutritionalValue[itemScript.itemID];
+                    foodData.keyForEat = KeyCode.Q;
+                }
                 Outline outline = obj.AddComponent<Outline>();
                 outline.OutlineMode = Outline.Mode.OutlineVisible;
                 SpawnObjectRandomly(obj, 0.05f);

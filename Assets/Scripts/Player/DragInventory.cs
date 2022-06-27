@@ -28,10 +28,22 @@ public class DragInventory : MonoBehaviour
 
                 obj.GetComponent<Slot>().CheckForItem();
 
-                GameObject dropItem = Instantiate(obj.GetComponent<Slot>().slotsItem.gameObject);
+                GameObject dropItem = Instantiate(obj, obj.transform);
+                Outline outline = dropItem.GetComponent<Slot>().slotsItem.gameObject.GetComponent<Outline>();
+                if (outline == null)
+                {
+                    outline = dropItem.GetComponent<Slot>().slotsItem.gameObject.AddComponent<Outline>();
+                }
+                outline.OutlineColor = Color.black;
+                outline.OutlineWidth = 10;
+                outline.enabled = true;
 
-                dropItem.GetComponent<Item>().amountInStack = 1;
-                dropItem.GetComponent<Item>().DropItem();
+                dropItem.GetComponent<Slot>().slotsItem.gameObject.AddComponent<Rigidbody>();
+
+                dropItem.GetComponent<Slot>().slotsItem.amountInStack = 1;
+                dropItem.GetComponent<Slot>().DropItem();
+
+                Destroy(dropItem);
             }
 
         }
