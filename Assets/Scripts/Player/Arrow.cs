@@ -22,37 +22,22 @@ public class Arrow : MonoBehaviour
         }
     }
 
-    //private void FixedUpdate()
-    //{
-    //    GroundCheck();
-    //}
     public void SetSpeed(Vector3 startVelocity)
     {
         GameObject newTrail = Instantiate(trail, transform);
         rb.isKinematic = false;
         rb.detectCollisions = true;
-        rb.velocity = startVelocity;  
+        rb.velocity = startVelocity;
     }
-    //private void GroundCheck()
-    //{
-    //    RaycastHit hitInfo;
-    //    if (Physics.SphereCast(transform.position, rb, Vector3.down, out hitInfo,
-    //                           ((m_Capsule.height / 2f) - m_Capsule.radius) + advancedSettings.groundCheckDistance, Physics.AllLayers, QueryTriggerInteraction.Ignore))
-    //    {
-    //        Destroy(rb);
-    //        Destroy(gameObject, lifeTimeAfterHit);
-    //        GameObject newSpark = Instantiate(spark, transform.position, transform.rotation);
-    //        newSpark.transform.parent = transform;
-
-    //    }
 
 
-    //}
 
-
-    private void OnCollisionEnter()
+    private void OnCollisionEnter(Collision collision)
     {
-
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Destroy(collision.gameObject);
+        }
         Destroy(rb);
         Destroy(gameObject, lifeTimeAfterHit);
         GameObject newSpark = Instantiate(spark, transform.position, transform.rotation);
