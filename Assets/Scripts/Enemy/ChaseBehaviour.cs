@@ -45,6 +45,7 @@ public class ChaseBehaviour : StateMachineBehaviour
         else if (distanceToPlayer >= sightRange)
         {
             animator.SetBool("isChasing", false);
+            animator.SetBool("isPatrolling", true);
         }
     }
 
