@@ -84,6 +84,7 @@ public class InGameMenuController : MenuContoller
     public void KillMePlease()
     {
         ResetProgress();
-        SceneManager.LoadScene(sceneWhereToGo);
+        SaveDataManager.SaveJsonData(saveData);
+        Application.Quit();
     }
 }

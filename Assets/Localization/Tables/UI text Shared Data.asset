@@ -68,7 +68,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 46978471886848
-    m_Key: LeaveToMenu
+    m_Key: LeaveGame
     m_Metadata:
       m_Items: []
   - m_Id: 64488571207680
@@ -137,6 +137,8 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 1171726136311808
     m_Key: Reset
+    m_Metadata:
+      m_Items: []
   - m_Id: 1604336178483200
     m_Key: Death
     m_Metadata:

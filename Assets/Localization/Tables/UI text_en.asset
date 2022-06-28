@@ -72,7 +72,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 46978471886848
-    m_Localized: Leave to the menu
+    m_Localized: Leave the game
     m_Metadata:
       m_Items: []
   - m_Id: 64488571207680
@@ -142,6 +142,8 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 1171726136311808
     m_Localized: Reset progress
+    m_Metadata:
+      m_Items: []
   - m_Id: 1604336178483200
     m_Localized: You died
     m_Metadata:
