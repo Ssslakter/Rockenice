@@ -5,7 +5,7 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     public string equipmentType;
-    public int equipmentIndex;
+    public int equipmentIndex; 
     [Space]
     public Sprite itemSprite;
     [Space]
@@ -13,4 +13,15 @@ public class Item : MonoBehaviour
     public int maxStackSize = 10;
     [Space]
     public int itemID;
+
+    IEnumerator Example()
+    {
+        yield return new WaitForSecondsRealtime(1);
+    }
+
+    private void OnCollisionEnter()
+    {
+        Example();
+        Destroy(gameObject.GetComponent<Rigidbody>());
+    }
 }

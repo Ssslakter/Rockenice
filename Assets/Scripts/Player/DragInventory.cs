@@ -13,17 +13,37 @@ public class DragInventory : MonoBehaviour
 
     public Image followMouseImage;
 
-    void FixedUpdate()
+    void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.Q))
         {
             GameObject obj = GetObjectUnderMouse();
             if (obj)
             {
-                //obj.GetComponent<Item>().amountInStack -= 1;
-                //Instantiate(obj).GetComponent<Slot>().DropItem();
-                obj.GetComponent<Slot>().DropItem();
+                obj.GetComponent<Slot>().slotsItem.amountInStack -= 1;
+                if (obj.GetComponent<Slot>().slotsItem.amountInStack == 0)
+                {
+                    Destroy(obj.GetComponent<Slot>().slotsItem.gameObject);
+                }
+
+                obj.GetComponent<Slot>().CheckForItem();
+
+                GameObject dropItem = Instantiate(obj, obj.transform);
+                Outline outline = dropItem.GetComponent<Slot>().slotsItem.gameObject.GetComponent<Outline>();
+                if (outline == null)
+                {
+                    outline = dropItem.GetComponent<Slot>().slotsItem.gameObject.AddComponent<Outline>();
+                }
+                outline.OutlineColor = Color.black;
+                outline.OutlineWidth = 10;
+                outline.enabled = true;
+
+                dropItem.GetComponent<Slot>().slotsItem.gameObject.AddComponent<Rigidbody>();
+
+                dropItem.GetComponent<Slot>().slotsItem.amountInStack = 1;
+                dropItem.GetComponent<Slot>().DropItem();
+
+                Destroy(dropItem);
             }
 
         }

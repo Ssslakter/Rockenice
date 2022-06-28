@@ -18,7 +18,7 @@ public class InGameMenuController : MenuContoller
     }
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Escape))
+        if (Input.GetKeyUp(KeyCode.Escape) && !HealthBar.dead)
         {
             gameIsPaused = !gameIsPaused;
             PauseGame();
@@ -30,7 +30,10 @@ public class InGameMenuController : MenuContoller
         ScoreController.score = saveData.maxScore;
         HealthBar.hp = saveData.hp;
         gameIsPaused = false;
-        PauseGame();
+        if (!HealthBar.dead)
+        {
+            PauseGame();
+        }
     }
     public void StopPlaying()
     {
@@ -66,9 +69,9 @@ public class InGameMenuController : MenuContoller
     public void SaveProgress()
     {
         saveData.isSavedExists = true;
+        saveData.hp = HealthBar.hp;
         saveData.playerPosition = Global.player.transform.position;
         saveData.maxScore = ScoreController.score;
-        saveData.hp = HealthBar.hp;
         SaveDataManager.SaveJsonData(saveData);
     }
 
@@ -76,5 +79,11 @@ public class InGameMenuController : MenuContoller
     {
         base.ChangeLanguage();
         crosshair.transform.GetChild(0).GetComponent<TMP_Text>().text = "";
+    }
+
+    public void KillMePlease()
+    {
+        ResetProgress();
+        SceneManager.LoadScene(sceneWhereToGo);
     }
 }

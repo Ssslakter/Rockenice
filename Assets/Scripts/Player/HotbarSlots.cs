@@ -31,7 +31,6 @@ public class HotbarSlots : MonoBehaviour
         if (Input.GetKeyDown(key))
         {
             number = 0;
-            
             Equip();
         }
         if (Input.GetKeyDown(key2))

@@ -23,7 +23,7 @@ public class Slot : MonoBehaviour
         {
             slotsItem.transform.parent = null;
             slotsItem.gameObject.SetActive(true);
-            slotsItem.transform.position = Camera.main.transform.position + Camera.main.transform.forward;
+            slotsItem.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 1.5f;
         }
     }
 

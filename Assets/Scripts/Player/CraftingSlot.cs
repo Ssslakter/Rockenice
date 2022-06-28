@@ -36,8 +36,9 @@ public class CraftingSlot : MonoBehaviour
 
         Item z = Instantiate(craftedItem, Vector3.zero, Quaternion.identity).GetComponent<Item>();
         z.amountInStack = craftedItemAmount;
-
         inv.AddItem(z);
+        inv.craftPanel.GetComponent<CheckItemsForCreation>().UpdateItems();
+
     }
 }
 

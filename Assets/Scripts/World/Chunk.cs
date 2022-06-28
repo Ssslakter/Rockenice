@@ -95,7 +95,7 @@ public class ChunkMesh : MonoBehaviour
             {
                 GameObject obj = Instantiate(item);
                 obj.transform.localScale = Vector3.one * 2;
-                SpawnObjectRandomly(obj, 0.001f);
+                SpawnObjectRandomly(obj, 0.5f);
             }
         }
     }
@@ -110,6 +110,15 @@ public class ChunkMesh : MonoBehaviour
                 Item itemScript = obj.AddComponent<Item>();
                 itemScript.itemID = Global.nameToId[item.name];
                 itemScript.itemSprite = Global.idToSprite[itemScript.itemID];
+                if (Global.foodIdToNutritionalValue.ContainsKey(itemScript.itemID))
+                {
+                    Food foodData = obj.AddComponent<Food>();
+                    itemScript.equipmentType = "Food";
+                    itemScript.equipmentIndex = Global.foodIdToEquipmentIndex[itemScript.itemID];
+                    foodData.health = Global.player.GetComponent<Inventory>().health;
+                    foodData.nutritionalValue = Global.foodIdToNutritionalValue[itemScript.itemID];
+                    foodData.keyForEat = KeyCode.Q;
+                }
                 Outline outline = obj.AddComponent<Outline>();
                 outline.OutlineMode = Outline.Mode.OutlineVisible;
                 SpawnObjectRandomly(obj, 0.05f);
@@ -132,11 +141,11 @@ public class ChunkMesh : MonoBehaviour
             spawnPlace = dotProduct > mesh.normals[spawnPlace].normalized.y ? randomIndex : spawnPlace;
             cnt++;
         }
-        while (dotProduct < flatnessCoef || cnt >= 1000);
+        while (dotProduct < flatnessCoef || cnt >= 200);
 
         gameObject.transform.parent = transform;
         gameObject.transform.localPosition = mesh.vertices[spawnPlace];
-        gameObject.transform.rotation = Quaternion.LookRotation(Vector3.forward * Random.Range(-1, 1) + Vector3.right * Random.Range(0.1f, 1), (mesh.normals[spawnPlace].normalized + 1.5f * Vector3.up) / 2f);
+        gameObject.transform.rotation = Quaternion.LookRotation(Vector3.forward * Random.Range(-1, 1) + Vector3.right * Random.Range(0.1f, 1), mesh.normals[spawnPlace].normalized);
     }
 
 }

@@ -37,7 +37,7 @@ public class Bow : MonoBehaviour
             if (!charging)
             {
                 //взятие стрелы
-                if (inventory.GetItemAmount(currentArrow.gameObject.GetComponent<Item>().itemID) > 0)
+                if (inventory.GetItemAmount(arrow.GetComponent<Item>().itemID) > 0)
                 {
                     charging = true;
                     currentArrow = StartCharging();
@@ -68,7 +68,7 @@ public class Bow : MonoBehaviour
                 else
                 {
                     //стреляем
-                    inventory.RemoveItemAmount(currentArrow.gameObject.GetComponent<Item>().itemID, 1);
+                    inventory.RemoveItemAmount(arrow.GetComponent<Item>().itemID, 1);
                     Shoot(tension, currentArrow);
                 }
                 charging = false;

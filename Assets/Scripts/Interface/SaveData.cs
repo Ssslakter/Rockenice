@@ -8,11 +8,11 @@ public class SaveData
     public int fullScreenMode;
     public int currentLanguage;
     public Vector3 playerPosition;
-    public string maxScore;
+    public string maxScore = "0";
     public float hp;
     public bool isFiniteWorld;
     public int resolution;
-    public bool isSavedExists;
+    public bool isSavedExists = false;
 
     public string ToJson()
     {

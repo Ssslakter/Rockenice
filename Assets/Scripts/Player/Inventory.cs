@@ -10,12 +10,11 @@ public class Inventory : MonoBehaviour
     public GameObject inventoryObject;
     public GameObject aimPoint;
     public GameObject craftPanel;
-    public float distance = 2f;
+    public float distance;
 
     public Slot[] slots;
 
-    public Slot[] equipSlots;
-
+    public HealthBar health;
     void Start()
     {
         inventoryObject.SetActive(false);
@@ -28,7 +27,7 @@ public class Inventory : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab) && !InGameMenuController.gameIsPaused)
+        if (Input.GetKeyDown(KeyCode.Tab) && !InGameMenuController.gameIsPaused && !HealthBar.dead)
         {
             if (inventoryObject.activeSelf == false)
             {
@@ -183,42 +182,5 @@ public class Inventory : MonoBehaviour
             itemToBeAdded.gameObject.SetActive(false);
         }
     }
-
-
-
-
-    public void FormatInventory()
-    {
-        foreach (int id in Global.itemIds.Keys)
-        {
-            RemoveItemAmount(id, GetItemAmount(id));
-        }
-    }
-
-    public List<Item> SliceOfInventory()
-    {
-        List<Item> list = new List<Item>();
-
-        foreach (Slot i in slots)
-        {
-            if (i.transform.childCount > 2)
-            {
-                list.Add(i.transform.GetChild(2).GetComponent<Item>());
-            }
-        }
-
-        return list;
-    }
-
-    public void FillInventory(List<Item> items)
-    {
-        foreach(Item loadedItem in items)
-        {
-            AddItem(loadedItem);
-        }
-    }
-
-
-
 
 }
