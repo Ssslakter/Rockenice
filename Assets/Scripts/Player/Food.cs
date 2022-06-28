@@ -23,7 +23,14 @@ public class Food : MonoBehaviour
         {
             Global.player.GetComponent<Inventory>().RemoveItemAmount(idFood, 1);
 
-            health.AddHealth(nutritionalValue);
+            if (nutritionalValue > 0)
+            {
+                health.AddHealth(nutritionalValue);
+            }
+            else
+            {
+                health.RemoveHealth(nutritionalValue);
+            }
             Global.player.GetComponent<UnityStandardAssets.Characters.FirstPerson.RigidbodyFirstPersonController>().movementSettings.AddStamina(nutritionalValue);
 
             if (Global.player.GetComponent<Inventory>().GetItemAmount(idFood) == 0)

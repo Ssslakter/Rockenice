@@ -54,11 +54,11 @@ public class HealthBar : MonoBehaviour
 
     public void RemoveHealth(float value)
     {
-        Healthbar.fillAmount = Healthbar.fillAmount - value / 100;
+        Healthbar.fillAmount = Mathf.Clamp(Healthbar.fillAmount - value / 100, 0, 1);
         hp = Healthbar.fillAmount;
         text.text = Mathf.CeilToInt(Healthbar.fillAmount * 100).ToString();
         PlaySound();
-        if (Healthbar.fillAmount == 0)
+        if (Healthbar.fillAmount <= 0)
         {
             Global.player.GetComponent<AudioSource>().volume = 0;
             text.gameObject.SetActive(false);

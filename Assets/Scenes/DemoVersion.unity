@@ -844,7 +844,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 672344760716563828, guid: ca64f5bc1af5ed140871a46a29211fb5, type: 3}
       propertyPath: m_Center.z
-      value: 0.06546974
+      value: 1.03
       objectReference: {fileID: 0}
     - target: {fileID: 4701477076024506373, guid: ca64f5bc1af5ed140871a46a29211fb5, type: 3}
       propertyPath: m_Name
@@ -896,6 +896,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6749678772757225263, guid: ca64f5bc1af5ed140871a46a29211fb5, type: 3}
       propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7761738018573816185, guid: ca64f5bc1af5ed140871a46a29211fb5, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

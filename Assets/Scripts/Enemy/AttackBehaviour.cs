@@ -24,10 +24,10 @@ public class AttackBehaviour : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         distanceToPlayer = Vector3.Distance(player.position, animator.transform.position);
-
         if (distanceToPlayer > attackRange)
         {
             animator.SetBool("isAttacking", false);
+            animator.SetBool("isChasing", true);
         }
     }
 
