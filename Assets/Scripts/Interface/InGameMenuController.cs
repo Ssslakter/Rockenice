@@ -40,7 +40,7 @@ public class InGameMenuController : MenuContoller
         SaveProgress();
         SceneManager.LoadScene(sceneWhereToGo);
     }
-    void PauseGame()
+    public void PauseGame()
     {
         settingMenu.SetActive(gameIsPaused);
         crosshair.SetActive(!gameIsPaused);

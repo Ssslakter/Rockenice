@@ -114,6 +114,7 @@ public class MenuContoller : MonoBehaviour
         saveData.hp = SaveData.Default.hp;
         loadButton.interactable = false;
         saveData.isSavedExists = false;
+        SaveDataManager.SaveJsonData(saveData);
     }
 
 

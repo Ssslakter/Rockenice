@@ -80,8 +80,6 @@ public class Global : MonoBehaviour
         craftableItems = Resources.LoadAll<GameObject>("Prefabs/CraftableItems");
 
 
-
-
         if (flagForSprites)
         {
             foreach (Texture2D texture in textures)
@@ -96,7 +94,7 @@ public class Global : MonoBehaviour
             }
 
             flagForSprites = false;
-            
+
         }
     }
 }

@@ -60,6 +60,7 @@ public class HealthBar : MonoBehaviour
         PlaySound();
         if (Healthbar.fillAmount == 0)
         {
+            Global.player.GetComponent<AudioSource>().volume = 0;
             text.gameObject.SetActive(false);
             deadText.SetActive(true);
             OpenDeathScreen();
@@ -90,12 +91,14 @@ public class HealthBar : MonoBehaviour
         }
     }
 
-    void OpenDeathScreen()
+    public void OpenDeathScreen()
     {
-        dead = true;
-        killMePleaseObj.SetActive(true);
+        AudioListener.pause = true;
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        dead = true;
+        killMePleaseObj.SetActive(true);
+
     }
 }

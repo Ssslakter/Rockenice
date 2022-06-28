@@ -5,7 +5,6 @@ using UnityEngine;
 public class ChunkMesh : MonoBehaviour
 {
 
-
     [Range(8, 256)]
     public int resolution;
     [Range(1, 6)]
@@ -87,6 +86,7 @@ public class ChunkMesh : MonoBehaviour
         return texture;
     }
 
+
     public void SpawnBigObjects()
     {
         foreach (GameObject item in Global.prefabs)
@@ -94,8 +94,12 @@ public class ChunkMesh : MonoBehaviour
             for (int i = 0; i < Random.Range(0, 5); i++)
             {
                 GameObject obj = Instantiate(item);
-                obj.transform.localScale = Vector3.one * 2;
+                if (obj.tag != "Enemy")
+                {
+                    obj.transform.localScale = Vector3.one * 2;
+                }
                 SpawnObjectRandomly(obj, 0.1f);
+                obj.transform.parent = null;
             }
         }
     }
