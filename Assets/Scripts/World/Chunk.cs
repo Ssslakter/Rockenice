@@ -95,7 +95,7 @@ public class ChunkMesh : MonoBehaviour
             {
                 GameObject obj = Instantiate(item);
                 obj.transform.localScale = Vector3.one * 2;
-                SpawnObjectRandomly(obj, 0.5f);
+                SpawnObjectRandomly(obj, 0.1f);
             }
         }
     }
@@ -141,11 +141,11 @@ public class ChunkMesh : MonoBehaviour
             spawnPlace = dotProduct > mesh.normals[spawnPlace].normalized.y ? randomIndex : spawnPlace;
             cnt++;
         }
-        while (dotProduct < flatnessCoef || cnt >= 200);
+        while (dotProduct < flatnessCoef || cnt >= 800);
 
         gameObject.transform.parent = transform;
         gameObject.transform.localPosition = mesh.vertices[spawnPlace];
-        gameObject.transform.rotation = Quaternion.LookRotation(Vector3.forward * Random.Range(-1, 1) + Vector3.right * Random.Range(0.1f, 1), mesh.normals[spawnPlace].normalized);
+        gameObject.transform.rotation = Quaternion.LookRotation(Vector3.forward * Random.Range(-1, 1) + Vector3.right * Random.Range(0.1f, 1), (2 * Vector3.up + mesh.normals[spawnPlace].normalized) / 2);
     }
 
 }
